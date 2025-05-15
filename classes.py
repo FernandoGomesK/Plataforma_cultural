@@ -52,3 +52,21 @@ class Staff(Person):
 class Participant(Person):
     def __init__(self):
         super().__init__()
+        
+class Event():
+    def __init__(self, name, type, description, organizer, total_tickets):
+        self.name = name
+        self.type = type
+        self.description = description
+        self.organizer = organizer
+        self.total_tickets = total_tickets
+        
+class Ticket:
+    def __init__(self,event: Event, price):
+        self.event = event
+        self. price = price
+        
+    def add_ticket():
+        
+        
+        
