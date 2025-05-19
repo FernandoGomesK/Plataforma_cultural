@@ -19,6 +19,7 @@ class System():
         self.ticket_mgr = Tickets()
     
     def run(self):
+        
         while True:
             
             menu = input("select the option: ")

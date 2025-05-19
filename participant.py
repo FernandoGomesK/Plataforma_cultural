@@ -1,5 +1,6 @@
 from person import Person
 from typing import List
+from ticket import Ticket
 
 
 class Participant(Person):

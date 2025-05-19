@@ -6,7 +6,7 @@ class Ticket:
     def __init__(self, event:Event, owner:Participant, purchase_date: date, ticket_id:str,price:float, ticket_type:str, is_active:bool):
         self._event = event
         self._owner = owner
-        self._purchase_date = purchase_date #adequar a data corretamente
+        self._purchase_date = purchase_date 
         self._ticket_id = ticket_id
         self._price = price
         self._ticket_type = ticket_type
