@@ -4,7 +4,7 @@ from ticket import Ticket
 
 
 class Participant(Person):
-    def __init__(self, name, cpf, age, adress, tickets):
+    def __init__(self, name, cpf, age, adress, ticket):
         super().__init__(name, cpf, age, adress)
         self.tickets = List["Ticket"]
     

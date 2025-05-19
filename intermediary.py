@@ -1,5 +1,7 @@
 from person import Person
 from typing import List
+from ticket import Ticket
+from event import Event
 class Intermediary(Person):
     def __init__(self, name, cpf, age, adress):
         self._managed_events = List['Event']
