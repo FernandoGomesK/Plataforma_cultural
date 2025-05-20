@@ -2,8 +2,8 @@ from ticket import Ticket
 
 class System():
     def __init__(self, name):
-         self.name = name
-         self.ticket_mgr = Ticket()    
+        self.name = name
+        self.ticket_mgr = Ticket()    
     def run(self):
         while True:
             
