@@ -8,5 +8,5 @@ class Organizer(Person):
     def request_event():
         pass
     
-    def autentheticate():
-        pass
+    def authenticate(self) -> bool:
+        return True

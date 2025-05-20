@@ -17,10 +17,10 @@ class Participant(Person):
     def tickets(self):
         return self._tickets
 
-    def authenticate(self):
-        pass
+    def authenticate(self) -> bool:
+        return True
 
-    def write_review(self, event: Event, rating: int, comment: str):
+    def write_review(self, event: Event, rating: int, comment: str) -> Review:
         review = Review(
             review_id=str(uuid.uuid4()),
             reviewer=self,
