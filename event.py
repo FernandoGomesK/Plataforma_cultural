@@ -1,11 +1,11 @@
 from typing import List
 from datetime import date
 from organizer import Organizer
-from review import Review
-from transaction import Transaction
+""" from review import Review """
+""" from transaction import Transaction """
 class Event:
     def __init__(self, name: str, type:str, description:str, start_date:date, end_date:date, organizer:Organizer, total_tickets:int,
-                 remaining_tickets: int, transactions: List[Transaction], review: List['Review']):
+                 remaining_tickets: int):
         self._name = name
         self._type = type
         self._description = description
@@ -14,8 +14,8 @@ class Event:
         self._organizer = organizer
         self._total_tickets = total_tickets
         self._remaining_tickets = remaining_tickets
-        self._transactions = transactions
-        self.review = review
+        """  self._transactions = transactions """
+        """ self.review = review """
         
 
     @property
@@ -91,3 +91,12 @@ class Event:
 
     def set_review(self, value):
         self.review = value
+        
+    def ticket_count():
+        pass
+    
+    def create_event():
+        pass
+        
+rock = Event("lola", "rock", "a simple rock event", "12/07/06", "13/07/06", "Jonas", "200", "200")
+print(rock)
