@@ -97,7 +97,7 @@ class Event:
     def reviews(self):
         return self._reviews
 
-    def add_review(self, review: Review):
+    def add_review(self, review: Review) -> None:
         self._reviews.append(review)
 
     def sell_ticket(

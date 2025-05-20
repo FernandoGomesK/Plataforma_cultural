@@ -22,7 +22,7 @@ class Ticket:
         self._ticket_id = ticket_id
         self._price = price
         self._ticket_type = ticket_type
-        self._is_active = True
+        self._is_active = is_active
         self._transaction = transaction
 
     @property
