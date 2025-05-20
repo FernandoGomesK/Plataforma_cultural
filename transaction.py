@@ -4,7 +4,7 @@ from ticket import Ticket
 from participant import Participant
 from event import Event
 
-class Transactions:
+class Transaction:
     def __init__(self, transaction_id: str, 
                  value: float, 
                  payment_method: str,
@@ -28,6 +28,15 @@ class Transactions:
                 f"Valor: R${self._value:.2f}\n"
                 f"Método: {self._payment_method}\n"
                 f"Status: {self._status}")
+    
+    def update_buyer(self, new_buyer: 'Participant') -> None:
+        if not isinstance(new_buyer, Participant):
+            raise TypeError("O comprador deve ser uma instância de Participant")
+        
+        self.buyer = new_buyer
+        
+        for ticket in self._tickets:
+            ticket.owner = new_buyer
 
     @property
     def tickets(self) -> List[Ticket]:
@@ -36,6 +45,10 @@ class Transactions:
     @property
     def buyer(self) -> Participant:
         return self._buyer
+    
+    @buyer.setter
+    def buyer(self, value: Participant):
+        self._buyer = value
 
     @property
     def event(self) -> Event:
