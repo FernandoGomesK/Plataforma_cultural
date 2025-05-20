@@ -97,6 +97,9 @@ class Event:
     def reviews(self):
         return self._reviews
 
+    def add_review(self, review: Review):
+        self._reviews.append(review)
+
     def sell_ticket(
         self,
         participant: Participant,

@@ -14,7 +14,7 @@ class Ticket:
         price: float,
         ticket_type: str,
         is_active: bool,
-        transaction: Transaction
+        transaction: Transaction,
     ):
         self._event = event
         self._owner = owner
@@ -22,7 +22,7 @@ class Ticket:
         self._ticket_id = ticket_id
         self._price = price
         self._ticket_type = ticket_type
-        self._is_active = False
+        self._is_active = True
         self._transaction = transaction
 
     @property
@@ -80,3 +80,8 @@ class Ticket:
     @is_active.setter
     def is_active(self, value):
         self._is_active = value
+
+    def transfer_to(self, new_owner: Participant):
+        if not self._is_active:
+            raise Exception("Ticket inativo não pode ser transferido.")
+        self._owner = new_owner
