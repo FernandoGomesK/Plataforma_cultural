@@ -75,7 +75,7 @@ class System():
             elif choice == "4":
                 self.create_review()
             elif choice == "5":
-                self.show_event_reviews()
+                self.show_reviews()
                 
                 
     def create_event(self):
