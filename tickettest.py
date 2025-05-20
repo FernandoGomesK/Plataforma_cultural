@@ -22,7 +22,7 @@ class System():
         
         while True:
             
-            menu = input("select the option: ")
+            menu = input("select the option: 1- show tickets, 2- add tickets,3- remove tickets: ")
             if menu == "1":
                 self.ticket_mgr.show_ticket()
             elif menu == "2":
