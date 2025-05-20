@@ -17,3 +17,19 @@ class InteractiveEvent(Event):
 
     def enable_participant_input(self):
         self._active_participants += 1
+
+    @property
+    def interaction_type(self):
+        return self._interaction_type
+
+    @interaction_type.setter
+    def interaction_type(self, value):
+        self._interaction_type = value
+
+    @property
+    def max_participants(self):
+        return self._max_participants
+
+    @property
+    def active_participants(self):
+        return self._active_participants

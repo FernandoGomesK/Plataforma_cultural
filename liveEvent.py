@@ -18,3 +18,19 @@ class LiveEvent(Event):
 
     def check_venue_capacity(self) -> bool:
         return self._remaining_tickets < self._capacity
+    
+    @property
+    def venue(self):
+        return self._venue
+    
+    @venue.setter
+    def venue(self, value):
+        self._venue = value
+    
+    @property
+    def capacity(self):
+        return self._capacity
+    
+    @capacity.setter
+    def capacity(self, value):
+        self._capacity = value
