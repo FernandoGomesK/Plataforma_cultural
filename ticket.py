@@ -68,8 +68,6 @@ class Ticket:
     def is_active(self, value):
         self._is_active = value
 
-    
-    
     def cancel(self):
         pass
     
