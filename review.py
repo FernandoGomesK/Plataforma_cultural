@@ -9,7 +9,6 @@ class Review:
         self._rating = rating
         self._comment = comment
         self._review_date = review_date
-        self._is_approved = False
         
     @property
     def review_id(self):
@@ -38,11 +37,3 @@ class Review:
     @property
     def review_date(self):
         return self._review_date
-    
-    @property
-    def is_approved(self):
-        return self._is_approved
-    
-    @is_approved.setter
-    def is_approved(self, value):
-        self._is_approved = value

@@ -2,21 +2,32 @@ from typing import List
 from datetime import date
 from organizer import Organizer
 from review import Review
+from ticket import Ticket
+from participant import Participant
 from transaction import Transaction
+import uuid
+
+
 class Event:
-    def __init__(self, name: str, type:str, description:str, start_date:date, end_date:date, organizer:Organizer, total_tickets:int,
-                 remaining_tickets: int, transactions: List[Transaction], review: List['Review']):
+    def __init__(
+        self,
+        name: str,
+        type: str,
+        description: str,
+        start_date: date,
+        end_date: date,
+        organizer: Organizer,
+        total_tickets: int,
+    ):
         self._name = name
         self._type = type
         self._description = description
-        self.start_date = start_date # inserir dia inicial via biblioteca datetime
-        self.end_date = end_date # inserir dia final ''   '' ''
+        self._start_date = start_date
+        self._end_date = end_date
         self._organizer = organizer
         self._total_tickets = total_tickets
-        self._remaining_tickets = remaining_tickets
-        self._transactions = transactions
-        self.review = review
-        
+        self._remaining_tickets = total_tickets
+        self._reviews: List[Review] = []
 
     @property
     def name(self):
@@ -42,24 +53,28 @@ class Event:
     def description(self, value):
         self._description = value
 
-    def get_start_date(self):
-        return self.start_date
+    @property
+    def start_date(self):
+        return self._start_date
 
-    def set_start_date(self, value):
-        self.start_date = value
+    @start_date.setter
+    def start_date(self, value: date):
+        self._start_date = value
 
-    def get_end_date(self):
-        return self.end_date
+    @property
+    def end_date(self):
+        return self._end_date
 
-    def set_end_date(self, value):
-        self.end_date = value
+    @end_date.setter
+    def end_date(self, value: date):
+        self._end_date = value
 
     @property
     def organizer(self):
         return self._organizer
 
     @organizer.setter
-    def organizer(self, value):
+    def organizer(self, value: Organizer):
         self._organizer = value
 
     @property
@@ -79,15 +94,29 @@ class Event:
         self._remaining_tickets = value
 
     @property
-    def transactions(self):
-        return self._transactions
+    def reviews(self):
+        return self._reviews
 
-    @transactions.setter
-    def transactions(self, value):
-        self._transactions = value
+    def sell_ticket(
+        self,
+        participant: Participant,
+        ticket_type: str,
+        price: float,
+        transaction: Transaction,
+    ) -> Ticket:
+        if self._remaining_tickets <= 0:
+            raise Exception("Ingressos esgotados.")
 
-    def get_review(self):
-        return self.review
+        ticket = Ticket(
+            event=self,
+            owner=participant,
+            purchase_date=date.today(),
+            ticket_id=str(uuid.uuid4()),
+            price=price,
+            ticket_type=ticket_type,
+            is_active=True,
+            transaction=transaction,
+        )
 
-    def set_review(self, value):
-        self.review = value
+        self._remaining_tickets -= 1
+        return ticket

@@ -1,16 +1,29 @@
-from  event import Event
+from event import Event
 from participant import Participant
 from datetime import date
+from transaction import Transaction
+
 
 class Ticket:
-    def __init__(self, event:Event, owner:Participant, purchase_date: date, ticket_id:str,price:float, ticket_type:str, is_active:bool):
+    def __init__(
+        self,
+        event: Event,
+        owner: Participant,
+        purchase_date: date,
+        ticket_id: str,
+        price: float,
+        ticket_type: str,
+        is_active: bool,
+        transaction: Transaction
+    ):
         self._event = event
         self._owner = owner
-        self._purchase_date = purchase_date 
+        self._purchase_date = purchase_date
         self._ticket_id = ticket_id
         self._price = price
         self._ticket_type = ticket_type
         self._is_active = False
+        self._transaction = transaction
 
     @property
     def event(self):
@@ -67,14 +80,3 @@ class Ticket:
     @is_active.setter
     def is_active(self, value):
         self._is_active = value
-
-    
-    
-    def cancel(self):
-        pass
-    
-    def validate(self):
-        pass
-    
-    def transfer_to(new_owner: Participant):
-        pass
