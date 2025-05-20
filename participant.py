@@ -1,15 +1,16 @@
 from person import Person
-from typing import List
 from ticket import Ticket
-
+from event import Event
 
 class Participant(Person):
-    def __init__(self, name, cpf, age, adress, ticket):
-        super().__init__(name, cpf, age, adress)
-        self.tickets = List["Ticket"]
+    def __init__(self, name: str, cpf: str, age: int, address: str, ticket: Ticket | None = None) -> None:
+        super().__init__(name, cpf, age, address)
+        self.tickets: list[Ticket] = [] 
+        if ticket:
+            self.tickets.append(ticket)
     
-    def authentiicate():
+    def authenticate(self, password: str) -> bool:  
         pass
-
-    def write_review():
+    
+    def write_review(self, event: 'Event', comment: str, rating: int) -> None:
         pass

@@ -5,7 +5,7 @@ from review import Review
 from transactions import Transactions
 class Event:
     def __init__(self, name: str, type:str, description:str, start_date:date, end_date:date, organizer:Organizer, total_tickets:int,
-                 remaining_tickets: int, transactions: List['Transactions'], review: List['Review']):
+                remaining_tickets: int, transactions: List['Transactions'], review: List['Review']):
         self._name = name
         self._type = type
         self._description = description
