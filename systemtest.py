@@ -131,7 +131,7 @@ class System():
             print("there is no event to write a review on")
             return
         print("current active events")
-        for idx, event in enumerate(self.active_events):
+        for idx, event in enumerate(self.active_events, 1):
             print(f"{idx}. {event.name}")
             
             choice = int(input("Select Event: ")) - 1
@@ -147,7 +147,7 @@ class System():
             print("\nThere are no events to review")
             return
             
-        self.show_active_events
+        self.show_active_events()
             
         try:
             choice = int(input("Enter event number: ")) - 1
