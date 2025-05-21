@@ -1,38 +1,44 @@
-class Person:
-    def __init__(self, name:str, cpf:str, age:str, adress:str):
+from abc import ABC, abstractmethod
+
+
+class Person(ABC):
+    def __init__(self, name: str, cpf: str, age: str, address: str):
         self._name = name
-        self._cpf = cpf
-        self._age = age 
-        self._adress = adress
+        self._cpf = cpf  # CPF can serve as a unique ID for persons
+        self._age = age
+        self._address = address
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self._name
 
     @name.setter
-    def name(self, value):
+    def name(self, value: str):
         self._name = value
 
     @property
-    def cpf(self):
+    def cpf(self) -> str:
         return self._cpf
 
-    @cpf.setter
-    def cpf(self, value):
-        self._cpf = value
+    # CPF should ideally be immutable once set, so no setter is provided.
 
     @property
-    def age(self):
+    def age(self) -> str:
         return self._age
 
     @age.setter
-    def age(self, value):
+    def age(self, value: str):
         self._age = value
 
     @property
-    def adress(self):
-        return self._adress
+    def address(self) -> str:
+        return self._address
 
-    @adress.setter
-    def adress(self, value):
-        self._adress = value
+    @address.setter
+    def address(self, value: str):
+        self._address = value
+
+    @abstractmethod
+    def authenticate(self) -> bool:
+        """Authenticates the person."""
+        pass
