@@ -12,12 +12,12 @@ from ticket import Ticket
 from transaction import Transaction
 from review import Review
 
-# Armazenamento em memória
+# --- Global Variables ---
 all_organizers = []
 all_participants = []
-all_events = {} # Dicionário: event_id -> Event Object
+all_events = {} # Dictionary: event_id -> Event Object
 
-# --- Funções Auxiliares de Entrada ---
+# --- Input Functions ---
 def get_string_input(prompt: str) -> str:
     while True:
         value = input(prompt).strip()
@@ -47,7 +47,7 @@ def get_date_input(prompt: str) -> date:
         except ValueError:
             print("Formato de data inválido. Use YYYY-MM-DD.")
 
-# --- Funções Auxiliares de Seleção ---
+# --- Selection Functions ---
 def select_organizer():
     if not all_organizers:
         print("Nenhum organizador cadastrado.")
@@ -99,7 +99,7 @@ def select_event():
             print("Escolha inválida.")
 
 
-# --- Funções de Gerenciamento de Organizadores ---
+# --- Management Functions for Organizers ---
 def create_organizer():
     print("\n--- Criar Novo Organizador ---")
     name = get_string_input("Nome: ")
@@ -108,7 +108,7 @@ def create_organizer():
     address = get_string_input("Endereço: ")
     role = get_string_input("Função (Role): ")
     
-    # Verifica se CPF já existe
+    # Verify if CPF already exists
     if any(org.cpf == cpf for org in all_organizers):
         print(f"Erro: Organizador com CPF {cpf} já existe.")
         return
@@ -125,12 +125,12 @@ def view_organizers():
     for org in all_organizers:
         print(f"- Nome: {org.name}, CPF: {org.cpf}, Função: {org.role}")
 
-# --- Funções de Gerenciamento de Participantes ---
+# --- Management Functions for Participants ---
 def create_participant():
     print("\n--- Criar Novo Participante ---")
     name = get_string_input("Nome: ")
     cpf = get_string_input("CPF: ")
-    # Verifica se CPF já existe
+    # Verify if CPF already exists
     if any(p.cpf == cpf for p in all_participants):
         print(f"Erro: Participante com CPF {cpf} já existe.")
         return
@@ -158,7 +158,7 @@ def view_participants():
             print("  Nenhum ingresso.")
 
 
-# --- Funções de Gerenciamento de Eventos ---
+# --- Management Functions for Events ---
 def create_event():
     print("\n--- Criar Novo Evento ---")
     organizer = select_organizer()
@@ -236,7 +236,7 @@ def view_all_events():
                 print(f"    - {reviewer_name}: {review.rating} estrelas - '{review.comment}'")
 
 
-# --- Funções de Ações ---
+# --- Management Functions for Tickets ---
 def buy_ticket_action():
     print("\n--- Comprar Ingresso ---")
     participant = select_participant()
@@ -287,7 +287,7 @@ def write_review_action():
 
     try:
         review = participant.write_review(event.event_id, rating, comment)
-        event.add_review(review) # Adiciona a avaliação ao evento
+        event.add_review(review) # Add review to the event
         print("Avaliação enviada com sucesso!")
     except Exception as e:
         print(f"Erro ao enviar avaliação: {e}")
@@ -319,7 +319,7 @@ def edit_event_action():
         diff = new_total_tickets - event.total_tickets
         event.total_tickets = new_total_tickets
         event.remaining_tickets += diff 
-        if event.remaining_tickets < 0: # Garante que não fique negativo
+        if event.remaining_tickets < 0: # Make sure it doesn't go negative
             event.remaining_tickets = 0
         print(f"Total de ingressos atualizado. Ingressos restantes: {event.remaining_tickets}")
         
@@ -329,7 +329,7 @@ def edit_event_action():
         print("Opção inválida.")
 
 
-# --- Loop Principal do Menu ---
+# --- Main Menu ---
 def main_menu():
     while True:
         print("\n===== Plataforma Cultura+ =====")
