@@ -1,5 +1,6 @@
 from typing import List
 import uuid
+import json
 
 class Review:
     def __init__(self, author: str, review: str):
@@ -19,7 +20,7 @@ class Event:
     def __init__(self, name: str, total_tickets: int, ticket_price: float):
         self.name = name
         self.ticket_price = ticket_price
-        self._tickets = [Ticket(self, price = ticket_price) for x in range(total_tickets)]
+        self._tickets = [Ticket(self, price = ticket_price)     for x in range(total_tickets)]
         self.reviews: List[Review] = []
         
     @property
@@ -63,6 +64,8 @@ class System():
             print("3 list event")
             print("4 write review")
             print("5 show review")
+            print("6 remove event")
+            print("7 exit")
             
             choice = input("choose one option: ")
             
@@ -76,6 +79,14 @@ class System():
                 self.create_review()
             elif choice == "5":
                 self.show_reviews()
+            elif choice == "6":
+                self.remove_event()
+            elif choice == "7":
+                print("thank you for using cultural app!")
+                break
+            else:
+                print("that was a invalid option, please pick one on the menu")
+                
                 
                 
     def create_event(self):
@@ -92,9 +103,7 @@ class System():
             print("there is no event with tickets to be sold")
             return
         
-        print("current active events")
-        for idx, event in enumerate(self.active_events, 1):
-            print(f"{idx}. {event.name} {len(event.available_tickets)} left")
+        self.show_active_events()
             
         try:
             choice = int(input("select Event: ")) - 1
@@ -103,11 +112,19 @@ class System():
             print(f"Sold ticket for {selected_event.name}! ID: {ticket.id}")
         except (ValueError, IndexError):
             print("Invalid event selection!")
+           #self.save_events()
 
         
     def show_active_events(self):
-        for event in self.active_events:
-            print(f"Event Name: {event.name}, Ticket Price: R${event.ticket_price}, remaining tickets: {len(event.available_tickets)}")
+        if not self.active_events:
+            print("there is no events currently active")
+            return
+            
+        print("current active events")
+        for idx, event in enumerate(self.active_events, 1): 
+            print(f"{idx}. Event name: {event.name} price: R${event.ticket_price}, {len(event.available_tickets)} tickets left")
+            print("/////////////////////////////")
+        
             
     def create_review(self):
         if not self.active_events:
@@ -130,9 +147,7 @@ class System():
             print("\nThere are no events to review")
             return
             
-        print("\nSelect an event to view reviews:")
-        for idx, event in enumerate(self.active_events, 1):
-            print(f"{idx}. {event.name}")
+        self.show_active_events
             
         try:
             choice = int(input("Enter event number: ")) - 1
@@ -140,6 +155,27 @@ class System():
             selected_event.show_reviews()  
         except (ValueError, IndexError):
             print("Invalid event selection!")
+            
+    def remove_event(self):
+        if not self.active_events:
+            print("there is no event to be removed")
+            
+        self.show_active_events()
+            
+        try:
+            choice = int(input("Enter the number of the event to be removed: ")) - 1
+            if 0 <= choice < len(self.active_events):
+                removed_event = self.active_events.pop(choice)
+                print(f"removed event: {removed_event.name}")  
+            else:
+                print("Invalid Event Number")        
+        except ValueError:
+            print("please input a valid number")
+
+        
+         
+         
+         
             
 tique = System()
 tique.run()
