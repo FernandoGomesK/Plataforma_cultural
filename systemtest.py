@@ -32,7 +32,7 @@ class Event:
             if not ticket.sold:
                 ticket.mark_as_sold()
                 return ticket
-            raise ValueError("unavailable")
+        raise ValueError("unavailable")
         
     def write_review(self, author: str, review: str) -> Review:
         review = Review(author, review)
@@ -122,7 +122,7 @@ class System():
             
         print("current active events")
         for idx, event in enumerate(self.active_events, 1): 
-            print(f"{idx}. Event name: {event.name} price: R${event.ticket_price}, {len(event.available_tickets)} tickets left")
+            print(f"{idx}. Event name: {event.name} price: R${event.ticket_price}, {len(event.available_tickets)}/{len(event._tickets)} tickets left")
             print("/////////////////////////////")
         
             
