@@ -1,87 +1,97 @@
-from event import Event
-from participant import Participant
 from datetime import date
-from transaction import Transaction
+from typing import TYPE_CHECKING
+
+# if TYPE_CHECKING:
+# from event import Event
+# from participant import Participant
+# from transaction import Transaction
 
 
 class Ticket:
     def __init__(
         self,
-        event: Event,
-        owner: Participant,
+        event_id: str,  # Changed from Event object
+        owner_id: str,  # Changed from Participant object (Participant's CPF)
         purchase_date: date,
         ticket_id: str,
         price: float,
         ticket_type: str,
         is_active: bool,
-        transaction: Transaction,
+        transaction_id: str,  # Changed from Transaction object
     ):
-        self._event = event
-        self._owner = owner
+        self._event_id = event_id
+        self._owner_id = owner_id
         self._purchase_date = purchase_date
         self._ticket_id = ticket_id
         self._price = price
         self._ticket_type = ticket_type
         self._is_active = is_active
-        self._transaction = transaction
+        self._transaction_id = transaction_id
 
     @property
-    def event(self):
-        return self._event
+    def event_id(self) -> str:
+        return self._event_id
 
-    @event.setter
-    def event(self, value):
-        self._event = value
-
-    @property
-    def owner(self):
-        return self._owner
-
-    @owner.setter
-    def owner(self, value):
-        self._owner = value
+    @event_id.setter
+    def event_id(self, value: str):
+        self._event_id = value
 
     @property
-    def purchase_date(self):
+    def owner_id(self) -> str:
+        return self._owner_id
+
+    @owner_id.setter
+    def owner_id(self, value: str):  # Participant's CPF
+        self._owner_id = value
+
+    @property
+    def purchase_date(self) -> date:
         return self._purchase_date
 
     @purchase_date.setter
-    def purchase_date(self, value):
+    def purchase_date(self, value: date):
         self._purchase_date = value
 
     @property
-    def ticket_id(self):
+    def ticket_id(self) -> str:
         return self._ticket_id
 
-    @ticket_id.setter
-    def ticket_id(self, value):
-        self._ticket_id = value
+    # ticket_id should be immutable
 
     @property
-    def price(self):
+    def price(self) -> float:
         return self._price
 
     @price.setter
-    def price(self, value):
+    def price(self, value: float):
         self._price = value
 
     @property
-    def ticket_type(self):
+    def ticket_type(self) -> str:
         return self._ticket_type
 
     @ticket_type.setter
-    def ticket_type(self, value):
+    def ticket_type(self, value: str):
         self._ticket_type = value
 
     @property
-    def is_active(self):
+    def is_active(self) -> bool:
         return self._is_active
 
     @is_active.setter
-    def is_active(self, value):
+    def is_active(self, value: bool):
         self._is_active = value
 
-    def transfer_to(self, new_owner: Participant):
+    @property
+    def transaction_id(self) -> str:
+        return self._transaction_id
+
+    @transaction_id.setter
+    def transaction_id(self, value: str):
+        self._transaction_id = value
+
+    def transfer_to(self, new_owner_id: str):  # Changed from Participant object
         if not self._is_active:
             raise Exception("Ticket inativo não pode ser transferido.")
-        self._owner = new_owner
+        self._owner_id = new_owner_id
+        print(f"Ticket {self.ticket_id} transferred to new owner (ID: {new_owner_id}).")
