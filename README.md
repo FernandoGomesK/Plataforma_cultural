@@ -2,9 +2,9 @@
 
 ## Descrição
 
-"Cultura+" é uma plataforma digital idealizada para a promoção e gestão de eventos culturais. [cite: 1] Este projeto em Python implementa o backend e a lógica de negócios para um sistema que permite a organizadores publicar diversos tipos de eventos (como shows, peças de teatro, workshops) e a participantes consultar a agenda, adquirir ingressos e interagir com as atividades disponíveis. [cite: 2, 3]
+"Cultura+" é uma plataforma digital idealizada para a promoção e gestão de eventos culturais. Este projeto em Python implementa o backend e a lógica de negócios para um sistema que permite a organizadores publicar diversos tipos de eventos (como shows, peças de teatro, workshops) e a participantes consultar a agenda, adquirir ingressos e interagir com as atividades disponíveis.
 
-O sistema foi modelado com foco em reusabilidade, organização e extensibilidade, representando diferentes tipos de eventos e interações entre os diversos atores da plataforma (organizadores, participantes, e intermediários). [cite: 4, 5]
+O sistema foi modelado com foco em reusabilidade, organização e extensibilidade, representando diferentes tipos de eventos e interações entre os diversos atores da plataforma (organizadores, participantes, e intermediários).
 
 ## Funcionalidades Implementadas (via `main.py`)
 
@@ -38,7 +38,7 @@ O projeto está organizado em módulos Python, cada um representando uma entidad
 * `person.py`: Classe base abstrata `Person`.
 * `organizer.py`: Classe `Organizer` que herda de `Person`.
 * `participant.py`: Classe `Participant` que herda de `Person`.
-* `intermediary.py`: Classe `Intermediary` que herda de `Person` (funcionalidades básicas no `main_test.py`, expansível).
+* `intermediary.py`: Classe `Intermediary` que herda de `Person`.
 * `event.py`: Classe base `Event`.
 * `liveEvent.py`: Classe `LiveEvent` que herda de `Event`.
 * `onlineEvent.py`: Classe `OnlineEvent` que herda de `Event`.
