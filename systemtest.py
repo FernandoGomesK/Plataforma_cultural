@@ -248,8 +248,7 @@ class System():
                             author=review_data['author'],
                             review=review_data['review']
                     ))
-                
-                self.active_events.append(event)
+                    self.active_events.append(event)
                 print('The Data Was Loaded sucessully')
                 print('//////////////////////////////')
                 
