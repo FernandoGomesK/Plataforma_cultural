@@ -1,0 +1,91 @@
+{
+  "events": [
+    {
+      "name": "as",
+      "ticket_price": 20.0,
+      "tickets": [
+        {
+          "id": "22c6",
+          "sold": false
+        },
+        {
+          "id": "63c0",
+          "sold": false
+        },
+        {
+          "id": "67dc",
+          "sold": false
+        },
+        {
+          "id": "f719",
+          "sold": false
+        },
+        {
+          "id": "35c2",
+          "sold": false
+        },
+        {
+          "id": "bba9",
+          "sold": false
+        },
+        {
+          "id": "7fa3",
+          "sold": false
+        },
+        {
+          "id": "7e3b",
+          "sold": false
+        },
+        {
+          "id": "08ca",
+          "sold": false
+        },
+        {
+          "id": "e514",
+          "sold": false
+        },
+        {
+          "id": "1195",
+          "sold": false
+        },
+        {
+          "id": "0de4",
+          "sold": false
+        },
+        {
+          "id": "6d26",
+          "sold": false
+        },
+        {
+          "id": "fbf2",
+          "sold": false
+        },
+        {
+          "id": "8677",
+          "sold": false
+        },
+        {
+          "id": "7be8",
+          "sold": false
+        },
+        {
+          "id": "ec34",
+          "sold": false
+        },
+        {
+          "id": "9116",
+          "sold": false
+        },
+        {
+          "id": "2a00",
+          "sold": false
+        },
+        {
+          "id": "51b3",
+          "sold": false
+        }
+      ],
+      "reviews": []
+    }
+  ]
+}
