@@ -235,7 +235,7 @@ class System():
                 for event_data in data.get('events', []):
                     event = Event(
                         name=event_data['name'],
-                        total_tickets=len(event_data['total_tickets']),
+                        total_tickets=len(event_data['tickets']),
                         ticket_price=event_data['ticket_price']
                     )
                     
@@ -250,6 +250,8 @@ class System():
                     ))
                 
                 self.active_events.append(event)
+                print('The Data Was Loaded sucessully')
+                print('//////////////////////////////')
                 
         except FileNotFoundError:
             print("No existing data found - starting fresh")

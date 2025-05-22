@@ -1,87 +1,87 @@
 {
   "events": [
     {
-      "name": "as",
+      "name": "Rock Jazz",
       "ticket_price": 20.0,
       "tickets": [
         {
-          "id": "22c6",
+          "id": "b5dc",
+          "sold": true
+        },
+        {
+          "id": "811c",
+          "sold": true
+        },
+        {
+          "id": "aa4d",
           "sold": false
         },
         {
-          "id": "63c0",
+          "id": "386c",
           "sold": false
         },
         {
-          "id": "67dc",
+          "id": "3d95",
           "sold": false
         },
         {
-          "id": "f719",
+          "id": "848a",
           "sold": false
         },
         {
-          "id": "35c2",
+          "id": "0925",
           "sold": false
         },
         {
-          "id": "bba9",
+          "id": "0af9",
           "sold": false
         },
         {
-          "id": "7fa3",
+          "id": "c32d",
           "sold": false
         },
         {
-          "id": "7e3b",
+          "id": "67ea",
           "sold": false
         },
         {
-          "id": "08ca",
+          "id": "0cc0",
           "sold": false
         },
         {
-          "id": "e514",
+          "id": "fdd4",
           "sold": false
         },
         {
-          "id": "1195",
+          "id": "96a7",
           "sold": false
         },
         {
-          "id": "0de4",
+          "id": "0d9a",
           "sold": false
         },
         {
-          "id": "6d26",
+          "id": "db9d",
           "sold": false
         },
         {
-          "id": "fbf2",
+          "id": "1484",
           "sold": false
         },
         {
-          "id": "8677",
+          "id": "286c",
           "sold": false
         },
         {
-          "id": "7be8",
+          "id": "ede6",
           "sold": false
         },
         {
-          "id": "ec34",
+          "id": "279a",
           "sold": false
         },
         {
-          "id": "9116",
-          "sold": false
-        },
-        {
-          "id": "2a00",
-          "sold": false
-        },
-        {
-          "id": "51b3",
+          "id": "4a11",
           "sold": false
         }
       ],
