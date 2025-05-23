@@ -1,8 +1,35 @@
-from typing import List
+from typing import List, Optional
 import uuid
 import json
 from pathlib import Path
+from dataclasses import dataclass
 
+@dataclass
+class Person:
+    name: str
+    cpf: str
+    age: str
+    email: str
+    
+class User(Person):
+    def __init__(self, name: str, cpf: str, age: str, email: str, password: str):
+        super().__init__(name, cpf, age, email)
+        self.password = password
+        self.tickets = List[Ticket] = []
+        
+    def verify_password(self, password: str) -> bool:
+        return self.password == password
+        
+class Organizer(Person):
+    def __init__(self, name: str, cpf: str, age: str, email: str, password: str, role: str):
+        super().__init__(name, cpf, age, email, password)
+        self.admin = "admin"
+        
+        
+class Intermediary(Person):
+    def __init__(self, name: str, cpf: str, age: str, email: str, password: str, role: str):
+        super().__init__(name, cpf, age, email, password)
+        
 class Review:
     def __init__(self, author: str, review: str):
         self.author = author
@@ -70,17 +97,13 @@ class Event:
             'reviews': [r.to_dict() for r in self.reviews]
 
         }
-        
-        
-        
-        
-
+               
 class System():
     def __init__(self):
         self.active_events: List[Event] = []
-        
-    def run(self):
         while True:
+     
+                
             print("Main Menu")
             print("1 Create Event")
             print("2 Sell Ticket")
@@ -116,8 +139,14 @@ class System():
             else:
                 print("that was a invalid option, please pick one on the menu")
                 
+    def login(self, username: str, password: str):
+        for user in self.users:
+            if username == username and user.verify_password(password):
+                return user
+        raise ValueError("invalid Login")
+        
                 
-                
+                          
     def create_event(self):
         name = input("Event name: ")
         tickets = int(input("Ticket Quantity: "))
@@ -256,7 +285,6 @@ class System():
             print("No existing data found - starting fresh")
         except Exception as e:
             print(f"Error loading data: {e}")
-         
-            
+                   
 tique = System()
 tique.run()
