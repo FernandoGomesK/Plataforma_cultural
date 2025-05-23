@@ -6,6 +6,7 @@ from user_classes import *
 from ticket import *
 from event import *
 from review import *
+from menus import *
 
 class System():
     def __init__(self):
@@ -86,13 +87,14 @@ class System():
             password = input("password: ")
         )
         self.active_users.append(user)
+        self.current_user = user
                 
     def login(self, username: str, password: str):
-        for user in self.users:
-            if username == username and user.verify_password(password):
-                return user
+        for user in self.active_users:
+            if user.username == username and user.verify_password(password):
+                return self.current_user
         raise ValueError("invalid Login")
-        
+
                 
                           
     def create_event(self):
@@ -130,10 +132,15 @@ class System():
             print(f"Sold ticket for {selected_event.name}! ID: {ticket.id}")
         except (ValueError, IndexError):
             print("Invalid event selection!")
-           #self.save_events()
 
         
     def show_active_events(self):
+        """
+    Prints all active events, with their current ticket availability.
+    
+    If there are no active events, the function will print a message and return
+    immediately.
+    """
         if not self.active_events:
             print("there is no events currently active")
             return
@@ -145,6 +152,7 @@ class System():
         
             
     def create_review(self):
+        
         if not self.active_events:
             print("there is no event to write a review on")
             return
@@ -191,6 +199,7 @@ class System():
             print("please input a valid number")
             
     def save(self):
+        
         data = {
             'events': [e.to_dict() for e in self.active_events],
         }   
