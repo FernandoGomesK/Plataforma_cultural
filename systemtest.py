@@ -12,23 +12,35 @@ class Person:
     email: str
     
 class User(Person):
-    def __init__(self, name: str, cpf: str, age: str, email: str, password: str):
+    def __init__(self, name: str, cpf: str, age: str, email: str,username: str, password: str):
         super().__init__(name, cpf, age, email)
+        self.username = username
         self.password = password
-        self.tickets = List[Ticket] = []
+        self.tickets: List[Ticket] = []
         
     def verify_password(self, password: str) -> bool:
         return self.password == password
         
 class Organizer(Person):
-    def __init__(self, name: str, cpf: str, age: str, email: str, password: str, role: str):
-        super().__init__(name, cpf, age, email, password)
-        self.admin = "admin"
+    def __init__(self, name: str, cpf: str, age: str, email: str, password: str, admin: bool = True):
+        super().__init__(name, cpf, age, email)
+        self.password = password
+        self.admin = admin
+        self.tickets: List[Ticket] = []
+        
+    def verify_password(self, password: str) -> bool:
+        return self.password == password
         
         
 class Intermediary(Person):
-    def __init__(self, name: str, cpf: str, age: str, email: str, password: str, role: str):
-        super().__init__(name, cpf, age, email, password)
+    def __init__(self, name: str, cpf: str, age: str, email: str, password: str, admin: bool = True):
+        super().__init__(name, cpf, age, email)
+        self.password = password
+        self.admin = admin
+        self.tickets: List[Ticket] = []
+        
+    def verify_password(self, password: str) -> bool:
+        return self.password == password
         
 class Review:
     def __init__(self, author: str, review: str):
@@ -101,7 +113,35 @@ class Event:
 class System():
     def __init__(self):
         self.active_events: List[Event] = []
+        self.active_users: List[User] = [
+            
+        ]
+        self.current_user: Optional[User] = None
         while True:
+            try:
+                self.load()
+            except Exception as e:
+                print(f"Error loading data: {e}")
+                
+                
+            if not self.current_user:
+                print("there is no current user")
+                print("////////////////////////")
+                print("1 login")
+                print("2 register") 
+                print("3 exit")
+                
+            choice = input("Choose one option: ")
+            
+            if choice == "1":
+                self.login()
+            elif choice == "2":
+                self.create_user()
+            elif choice == "3":
+                break
+            else:
+                print("invalid option, please select one from the menu")
+                
      
                 
             print("Main Menu")
@@ -138,6 +178,17 @@ class System():
                 break
             else:
                 print("that was a invalid option, please pick one on the menu")
+                
+    def create_user(self):
+        user = User(
+            name = input("Input your name: "),
+            cpf = input("CPF: "),
+            age = input("Age: "),
+            email = input("E-mail: "),
+            username = input("username: "),
+            password = input("password: ")
+        )
+        self.active_users.append(user)
                 
     def login(self, username: str, password: str):
         for user in self.users:
