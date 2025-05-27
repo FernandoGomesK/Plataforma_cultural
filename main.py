@@ -2,11 +2,13 @@ from typing import List, Optional
 import uuid
 import json
 from pathlib import Path
+from datetime import *
 from user_classes import *
 from ticket import *
 from event import *
 from review import *
 from menus import *
+import re
 
 class System():
     def __init__(self):
@@ -15,8 +17,15 @@ class System():
         self.current_user: Optional[User] = None
         self.run()
         
-        def run(self):
+    def run(self):
             while True:
+                if not self.current_user:
+                    choice = self._manage_Login_and_Register()
+                    if choice == "exit":
+                        break
+                else:
+                    self.manage_main_menu()
+                    
                 
                 
                 try:
@@ -25,13 +34,13 @@ class System():
                     print(f"Error loading data: {e}")
                     
                 if not self.current_user:
-                    login_menu()
+                    Login_menu()
                     
                 
                 
-        def login_menu():
+    def login_menu(self):
             while True:
-                choice = login_menu.show_menu()
+                choice = Login_menu.show_menu()
             
                 if choice == "1":
                     self.login()
@@ -42,64 +51,48 @@ class System():
                 else:
                     print("invalid option, please select one from the menu")  
                     
-        def main_menu():
+    def main_menu():
             while True:
-                choice = main_menu.show_menu()
+                choice = Main_menu.show_menu()
                 
                 if choice == "1":
                     pass
         
                     
-                
-     
-            """       
-            print("Main Menu")
-            print("1 Create Event")
-            print("2 Sell Ticket")
-            print("3 list event")
-            print("4 write review")
-            print("5 show review")
-            print("6 remove event")
-            print("7 save data")
-            print("8 load data")
-            print("9 exit")
-            
-            choice = input("choose one option: ")
-            
-            if choice == "1":
-                self.create_event()
-            elif choice == "2":
-                self.sell_tickets()
-            elif choice == "3":
-                self.show_active_events()
-            elif choice == "4":
-                self.create_review()
-            elif choice == "5":
-                self.show_reviews()
-            elif choice == "6":
-                self.remove_event()
-            elif choice == "7":
-                self.save()
-            elif choice == "8":
-                self.load()
-            elif choice == "9":
-                print("thank you for using cultural app!")
+    def create_user(self):
+        name = input("Input your name: "),
+        while True:
+            cpf = input("CPF(xxx.xxx.xxx-xx): ")
+            pattern = r'^(\d{3}\.\d{3}\.\d{3}-\d{2})$'
+            if re.fullmatch(pattern, cpf):
                 break
             else:
-                print("that was a invalid option, please pick one on the menu") """
-                
-    def create_user(self):
-        user = User(
-            name = input("Input your name: "),
-            cpf = input("CPF: "),
-            age = input("Age: "),
-            email = input("E-mail: "),
-            username = input("username: "),
-            password = input("password: ")
-        )
-        self.active_users.append(user)
-        self.current_user = user
-                
+                print("Please use xxx.xxx.xxx-xx format")
+        while True:
+            birth_date = input("Birth date(DD/MM/YYYY): ")
+            try:
+                birth = datetime.strptime(birth_date, "%d/%m/%Y")
+                age = (datetime.now() - birth).days // 365
+                if age >= 16:
+                    break
+                else:
+                    print("The User must be older than 16 years old")
+            except ValueError:
+                print("Invalid date format. Please use DD/MM/YYYY.")
+        
+        while True:
+            email = input("E-mail: ")
+            pattern = r'^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$'
+            if re.fullmatch(pattern, email):
+                break
+            else:
+                print("please use a valid e-mail adress")
+           
+        username = input("username: "),
+        password = input("password: ")
+        
+        
+      
     def login(self, username: str, password: str):
         for user in self.active_users:
             if user.username == username and user.verify_password(password):
@@ -118,18 +111,6 @@ class System():
         print(f"created {name}, with {tickets} tickets")
         
     def sell_tickets(self):
-        """
-    Prompts user to select an event and sells one ticket for the selected event.
-    
-    If there are no events with tickets left, the function will print a message and
-    return immediately.
-    
-    If the user enters an invalid event number, the function will print an error
-    message and return.
-    
-    When a ticket is successfully sold, the function will print a confirmation
-    message.
-    """
         if not self.active_events:
             print("there is no event with tickets to be sold")
             return
@@ -146,12 +127,6 @@ class System():
 
         
     def show_active_events(self):
-        """
-    Prints all active events, with their current ticket availability.
-    
-    If there are no active events, the function will print a message and return
-    immediately.
-    """
         if not self.active_events:
             print("there is no events currently active")
             return
@@ -217,7 +192,7 @@ class System():
 
         try:
             with open('data.json', 'w') as f:
-                json.dump(data, f, indent=2)
+                json.dump(data, f, indent=2)    
             print('The Data Was Saved sucessully')
         except Exception as e:
             print(f"Error saving data: {e}")

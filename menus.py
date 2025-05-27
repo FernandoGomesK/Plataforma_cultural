@@ -29,8 +29,7 @@ class Event_Menu():
             print("1 - Show Events")
             print("2 - Show Reviews")
             print("3 - Exit")
-            return(input("Choose one option: ")).strip()
+            
 
       
 
-        return input("Choose one option: ")
