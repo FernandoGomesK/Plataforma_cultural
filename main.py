@@ -11,37 +11,48 @@ from menus import *
 class System():
     def __init__(self):
         self.active_events: List[Event] = []
-        self.active_users: List[User] = [
-            
-        ]
+        self.active_users: List[User] = []
         self.current_user: Optional[User] = None
-        while True:
-            try:
-                self.load()
-            except Exception as e:
-                print(f"Error loading data: {e}")
+        self.run()
+        
+        def run(self):
+            while True:
                 
                 
-            if not self.current_user:
-                print("there is no current user")
-                print("////////////////////////")
-                print("1 login")
-                print("2 register") 
-                print("3 exit")
+                try:
+                    self.load()
+                except Exception as e:
+                    print(f"Error loading data: {e}")
+                    
+                if not self.current_user:
+                    login_menu()
+                    
                 
-            choice = input("Choose one option: ")
+                
+        def login_menu():
+            while True:
+                choice = login_menu.show_menu()
             
-            if choice == "1":
-                self.login()
-            elif choice == "2":
-                self.create_user()
-            elif choice == "3":
-                break
-            else:
-                print("invalid option, please select one from the menu")
+                if choice == "1":
+                    self.login()
+                elif choice == "2": 
+                    self.create_user()
+                elif choice == "3":   
+                    break
+                else:
+                    print("invalid option, please select one from the menu")  
+                    
+        def main_menu():
+            while True:
+                choice = main_menu.show_menu()
+                
+                if choice == "1":
+                    pass
+        
+                    
                 
      
-                
+            """       
             print("Main Menu")
             print("1 Create Event")
             print("2 Sell Ticket")
@@ -75,7 +86,7 @@ class System():
                 print("thank you for using cultural app!")
                 break
             else:
-                print("that was a invalid option, please pick one on the menu")
+                print("that was a invalid option, please pick one on the menu") """
                 
     def create_user(self):
         user = User(
@@ -243,5 +254,3 @@ class System():
         except Exception as e:
             print(f"Error loading data: {e}")
                    
-tique = System()
-tique.run()

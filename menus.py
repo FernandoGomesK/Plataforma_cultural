@@ -1,6 +1,8 @@
 class Login_menu():
     @staticmethod
     def show_menu():
+        print("Login Menu")
+        print("----------")
         print("1 - Login")
         print("2 - Register")
         print("3 - Exit")
