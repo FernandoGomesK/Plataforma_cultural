@@ -1,7 +1,6 @@
 from typing import List, Optional
 import uuid
 import json
-from pathlib import Path
 from datetime import *
 from user_classes import *
 from ticket import *
@@ -9,6 +8,7 @@ from event import *
 from review import *
 from menus import *
 import re
+from verifications import *
 
 class System():
     def __init__(self):
@@ -16,6 +16,7 @@ class System():
         self.active_users: List[User] = []
         self.current_user: Optional[User] = None
         self.run()
+        self.load
         
     def run(self):
             while True:
@@ -26,31 +27,43 @@ class System():
                 else:
                     self.manage_main_menu()
                     
-                
-                
-                try:
-                    self.load()
-                except Exception as e:
-                    print(f"Error loading data: {e}")
-                    
+    
                 if not self.current_user:
                     Login_menu()
                     
-                
-                
-    def login_menu(self):
+    def _manage_Login_and_Register(self) -> str:
             while True:
                 choice = Login_menu.show_menu()
             
                 if choice == "1":
+                    username = input("username: ")
+                    password = input("password: ")
+                    try: 
+                        user_found = self.login(username, password)
+                        if user_found:
+                            self.current_user = user_found
+                            print(f"Welcome {self.current_user.name}")
+                            return "continue"
+                    except ValueError as e:
+                        print(f"Error logging in: {e}")
                     self.login()
                 elif choice == "2": 
                     self.create_user()
                 elif choice == "3":   
-                    break
+                    return "exit"
                 else:
-                    print("invalid option, please select one from the menu")  
+                    print("invalid option, please select one from the menu")
                     
+                
+                    
+    def login(self, username: str, password: str):
+        for user in self.active_users:
+            if user.username == username and user.password == password:
+                return user
+        raise ValueError("User not found")
+        
+    
+    
     def main_menu():
             while True:
                 choice = Main_menu.show_menu()
@@ -63,8 +76,7 @@ class System():
         name = input("Input your name: "),
         while True:
             cpf = input("CPF(xxx.xxx.xxx-xx): ")
-            pattern = r'^(\d{3}\.\d{3}\.\d{3}-\d{2})$'
-            if re.fullmatch(pattern, cpf):
+            if is_valid_cpf(cpf):
                 break
             else:
                 print("Please use xxx.xxx.xxx-xx format")
@@ -79,11 +91,9 @@ class System():
                     print("The User must be older than 16 years old")
             except ValueError:
                 print("Invalid date format. Please use DD/MM/YYYY.")
-        
-        while True:
+        while True: 
             email = input("E-mail: ")
-            pattern = r'^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$'
-            if re.fullmatch(pattern, email):
+            if is_valid_email(email):
                 break
             else:
                 print("please use a valid e-mail adress")
@@ -93,11 +103,6 @@ class System():
         
         
       
-    def login(self, username: str, password: str):
-        for user in self.active_users:
-            if user.username == username and user.verify_password(password):
-                return self.current_user
-        raise ValueError("invalid Login")
 
                 
                           
@@ -229,3 +234,4 @@ class System():
         except Exception as e:
             print(f"Error loading data: {e}")
                    
+tique = System()
