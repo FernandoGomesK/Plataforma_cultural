@@ -7,37 +7,29 @@ from datetime import date
 import uuid
 
 if TYPE_CHECKING:
-    from event import Event  # For type hinting, though methods use event_id
+    from event import Event
 
 
 class Participant(Person):
     def __init__(self, name: str, cpf: str, age: str, address: str):
         super().__init__(name, cpf, age, address)
-        # _tickets attribute was missing based on your diagram, adding it.
-        # The diagram for Participant shows "tickets: List[Ticket]"
         self._tickets: List[Ticket] = []
 
     @property
     def tickets(self) -> List[Ticket]:
         return self._tickets
 
-    # tickets are typically added via buy_ticket, direct setter might not be common
     @tickets.setter
     def tickets(self, value: List[Ticket]):
         self._tickets = value
 
     def authenticate(self) -> bool:
-        # Placeholder for actual authentication logic
         print(f"Authenticating participant: {self.name}")
         return True
 
     def write_review(self, event_id: str, rating: int, comment: str) -> Review:
         # Note: This method creates a Review, but adding it to the Event's list
         # would require an Event object or a system-level function.
-        # The diagram shows Event.add_review(review), so the Event object
-        # would be needed.
-        # For now, it just creates and returns the review.
-        # The Event object itself would call its add_review method.
 
         review = Review(
             review_id=str(uuid.uuid4()),
@@ -92,7 +84,6 @@ class Participant(Person):
                     current_transaction.status = "failed"
                 else:  # Partially completed
                     current_transaction.status = "partially_completed"
-                    # Adjust transaction value if necessary based on actual tickets bought
                     current_transaction.value = len(bought_tickets) * price_per_ticket
                 print(
                     f"Transaction {current_transaction.transaction_id} status: {current_transaction.status}"

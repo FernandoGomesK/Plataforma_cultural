@@ -4,19 +4,14 @@ from typing import List, TYPE_CHECKING
 if TYPE_CHECKING:
     from ticket import Ticket
 
-    # from participant import Participant # Not needed if using buyer_id
-    # from event import Event # Not needed if using event_id
-
-
 class Transaction:
     def __init__(
         self,
         transaction_id: str,
         value: float,
         payment_method: str,
-        # tickets: List['Ticket'], # Initialized as empty, tickets added later
-        buyer_id: str,  # Changed from Participant object (Participant's CPF)
-        event_id: str,  # Changed from Event object
+        buyer_id: str,
+        event_id: str,
     ):
         self._transaction_id = transaction_id
         self._value = value

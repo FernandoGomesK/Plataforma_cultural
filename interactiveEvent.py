@@ -13,7 +13,7 @@ class InteractiveEvent(Event):
         organizer_id: str,
         total_tickets: int,
         interaction_type: str,
-        max_participants_interaction: int,  # Renamed from max_participants to avoid confusion with total_tickets
+        max_participants_interaction: int,
     ):
         super().__init__(
             name,
@@ -44,7 +44,6 @@ class InteractiveEvent(Event):
         self._max_participants_interaction = value
 
     def enable_participant_input(self) -> None:
-        # Logic to enable participant input
         print(
             f"Participant input enabled for {self.name} (Type: {self._interaction_type})."
         )

@@ -9,18 +9,18 @@ if TYPE_CHECKING:
     from transaction import Transaction
     from participant import (
         Participant,
-    )  # For sell_ticket participant_id, though it's a str
+    )
 
 
 class Event:
     def __init__(
         self,
         name: str,
-        event_type: str,  # Renamed from 'type' to avoid conflict with Python keyword
+        event_type: str,
         description: str,
         start_date: date,
         end_date: date,
-        organizer_id: str,  # Changed from Organizer object to ID
+        organizer_id: str,
         total_tickets: int,
     ):
         self._event_id = str(uuid.uuid4())
@@ -92,16 +92,12 @@ class Event:
 
     @total_tickets.setter
     def total_tickets(self, value: int):
-        # Consider implications if total_tickets changes after sales
         self._total_tickets = value
-        # Potentially adjust remaining_tickets if necessary
 
     @property
     def remaining_tickets(self) -> int:
         return self._remaining_tickets
 
-    # Setter for remaining_tickets is typically internal or managed by ticket sales
-    # For direct manipulation, if needed:
     @remaining_tickets.setter
     def remaining_tickets(self, value: int):
         self._remaining_tickets = value
@@ -115,15 +111,12 @@ class Event:
 
     def sell_ticket(
         self,
-        participant_id: str,  # Changed from Participant object
+        participant_id: str,
         ticket_type: str,
         price: float,
-        transaction_id: str,  # Changed from Transaction object
+        transaction_id: str,
     ) -> "Ticket":
         # Import Ticket locally to avoid circular import issues at module level
-        # if Ticket also imports Event for type hints.
-        # A better solution is 'from ticket import Ticket' at the top and
-        # using TYPE_CHECKING block or string literals for hints.
         from ticket import Ticket
 
         if self._remaining_tickets <= 0:

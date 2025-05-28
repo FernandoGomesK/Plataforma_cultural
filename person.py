@@ -20,8 +20,6 @@ class Person(ABC):
     def cpf(self) -> str:
         return self._cpf
 
-    # CPF should ideally be immutable once set, so no setter is provided.
-
     @property
     def age(self) -> str:
         return self._age

@@ -15,12 +15,9 @@ class Organizer(Person):
         self._role = value
 
     def request_event(self):
-        # Logic to request event creation
-        # This method's implementation details depend on system workflow
         print(f"Organizer {self.name} ({self.cpf}) is requesting a new event.")
         pass
 
     def authenticate(self) -> bool:
-        # Placeholder for actual authentication logic
         print(f"Authenticating organizer: {self.name}")
         return True

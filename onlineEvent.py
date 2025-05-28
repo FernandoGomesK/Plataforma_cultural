@@ -45,9 +45,7 @@ class OnlineEvent(Event):
 
     def send_access_link(
         self, participant_email: str
-    ):  # Assuming email is how link is sent
-        # Logic to send access link
+    ):
         print(
             f"Sending access link for {self.name} to {participant_email} for platform {self._platform}: {self._streaming_link}"
         )
-        # This method might need participant_id to fetch email or other contact info

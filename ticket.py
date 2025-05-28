@@ -1,23 +1,16 @@
 from datetime import date
-from typing import TYPE_CHECKING
-
-# if TYPE_CHECKING:
-# from event import Event
-# from participant import Participant
-# from transaction import Transaction
-
 
 class Ticket:
     def __init__(
         self,
-        event_id: str,  # Changed from Event object
-        owner_id: str,  # Changed from Participant object (Participant's CPF)
+        event_id: str,
+        owner_id: str,
         purchase_date: date,
         ticket_id: str,
         price: float,
         ticket_type: str,
         is_active: bool,
-        transaction_id: str,  # Changed from Transaction object
+        transaction_id: str,
     ):
         self._event_id = event_id
         self._owner_id = owner_id
@@ -90,7 +83,7 @@ class Ticket:
     def transaction_id(self, value: str):
         self._transaction_id = value
 
-    def transfer_to(self, new_owner_id: str):  # Changed from Participant object
+    def transfer_to(self, new_owner_id: str):
         if not self._is_active:
             raise Exception("Ticket inativo não pode ser transferido.")
         self._owner_id = new_owner_id
