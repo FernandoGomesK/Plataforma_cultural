@@ -287,7 +287,13 @@ class System():
             print("No existing data found - starting fresh")
         except Exception as e:
             print(f"Error loading data: {e}")
-                   
+            
+    def gen_admin(self):
+        new_person = User(name= "eu", cpf="123.456.789-10", age=str("18"), email="eu@eu.com", username="aisen", password="123", admin=True)
+        self.active_users.append(new_person)
+
 if __name__ == "__main__":
     cultural = System()
+    cultural.gen_admin()
     cultural.run()
+    
