@@ -189,11 +189,11 @@ class System():
         if not self.active_events:
             print("there is no events currently active")
             return
-            
-        print("current active events")
-        for idx, event in enumerate(self.active_events, 1): 
-            print(f"{idx}. Event name: {event.name} price: R${event.ticket_price}, {len(event.available_tickets)}/{len(event._tickets)} tickets left")
-            print("/////////////////////////////")
+        else:    
+            print("current active events")
+            for idx, event in enumerate(self.active_events, 1): 
+                print(f"{idx}. Event name: {event.name} price: R${event.ticket_price}, {len(event.available_tickets)}/{len(event._tickets)} tickets left")
+                print("/////////////////////////////")
         
             
     def create_review(self):

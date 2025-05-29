@@ -46,4 +46,4 @@ class Event_Manager():
             end_date = end_date
         )
         self._events.append(new_event)
-        print(f"created {name}, with {tickets} tickets")
+        return new_event
