@@ -4,11 +4,16 @@ from review import Review
 
 
 class Event:
-    def __init__(self, name: str, total_tickets: int, ticket_price: float):
+    def __init__(self, name: str, total_tickets: int, ticket_price: float,
+                 event_type: str, description: str, start_date: str, end_date: str):
         self.name = name
         self.ticket_price = ticket_price
-        self._tickets = [Ticket(self, price = ticket_price)     for x in range(total_tickets)]
+        self._tickets = [Ticket(self, price = ticket_price) for x in range(total_tickets)]
         self.reviews: List[Review] = []
+        self.event_type = event_type
+        self.description = description  
+        self.start_date = start_date
+        self.end_date = end_date
         
     @property
     def available_tickets(self) -> List[Ticket]:
@@ -41,5 +46,9 @@ class Event:
             'name': self.name,
             'ticket_price': self.ticket_price,
             'tickets': [t.to_dict() for t in self._tickets],
-            'reviews': [r.to_dict() for r in self.reviews]
+            'reviews': [r.to_dict() for r in self.reviews],
+            'type': self.event_type,
+            'description': self.description,
+            'start_date': self.start_date,
+            'end_date': self.end_date
         }

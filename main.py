@@ -7,6 +7,7 @@ from ticket import *
 from event import *
 from review import *
 from menus import *
+from Event_manager import *
 
 from verifications import *
 
@@ -15,7 +16,8 @@ class System():
         self.active_events: List[Event] = []
         self.active_users: List[User] = []
         self.current_user: Optional[User] = None
-        self.run()
+        self.event_manager = Event_Manager()
+        #self.data_manager = Data_manager()
         self.load()
         
     def run(self):
@@ -154,7 +156,7 @@ class System():
             print(f"Error creating user object: {e}")
       
 
-                
+    def create_e            
                           
     def create_event(self):
         name = input("Event name: ")
@@ -284,4 +286,6 @@ class System():
         except Exception as e:
             print(f"Error loading data: {e}")
                    
-tique = System()
+if __name__ == "__main__":
+    cultural = System()
+    cultural.run()

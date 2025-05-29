@@ -4,9 +4,10 @@ from datetime import *
 
 class Event_Manager():
     def __init__(self):
-        self._events = List[Event] = []
-        
+        self._events: List[Event] = []
+
     def create_event(self):
+        print("----------Create Event----------")
         name = input("Input the name of the Event: ")
         tickets = int(input("Input the number of tickets: "))
         price = float(input("Input the price of the ticket: "))
@@ -37,15 +38,17 @@ class Event_Manager():
         
         new_event = Event(
             name = name,
-            tickets = tickets,
-            price = price,
+            total_tickets = tickets,
+            ticket_price = price,
             event_type = event_type,
+            description = description,
             start_date = start_date,
-            end_date = end_date,
-            description = description
+            end_date = end_date
         )
         self._events.append(new_event)
         print(f"created {name}, with {tickets} tickets")
-        
-evento = Event()
-evento.create_event()
+
+manajo = Event_Manager()
+manajo.create_event(
+    
+)
