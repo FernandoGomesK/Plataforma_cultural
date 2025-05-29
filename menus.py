@@ -24,11 +24,13 @@ class Event_Menu():
             print("3 - Show Events")
             print("4 - Show Reviews")
             print("5 - Exit")
-            return(input("Choose one option: "))
+            return input("Choose one option: ")
         else:
             print("1 - Show Events")
             print("2 - Show Reviews")
-            print("3 - Exit")
+            print("3 - Write Review")
+            print("4 - Exit")
+            return input("Choose one option")
             
 
       

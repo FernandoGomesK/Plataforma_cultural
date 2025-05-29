@@ -7,7 +7,7 @@ from ticket import *
 from event import *
 from review import *
 from menus import *
-import re
+
 from verifications import *
 
 class System():
@@ -16,7 +16,7 @@ class System():
         self.active_users: List[User] = []
         self.current_user: Optional[User] = None
         self.run()
-        self.load
+        self.load()
         
     def run(self):
             while True:
@@ -25,7 +25,7 @@ class System():
                     if choice == "exit":
                         break
                 else:
-                    self.manage_main_menu()
+                    self.main_menu()
                     
     
                 if not self.current_user:
@@ -46,7 +46,6 @@ class System():
                             return "continue"
                     except ValueError as e:
                         print(f"Error logging in: {e}")
-                    self.login()
                 elif choice == "2": 
                     self.create_user()
                 elif choice == "3":   
@@ -61,19 +60,63 @@ class System():
             if user.username == username and user.password == password:
                 return user
         raise ValueError("User not found")
+    
+
+    def manage_event_menu(self):
+        is_current_user_admin = self.current_user.admin
+        while True:
+            print("\n--- Menu de Eventos ---")
+            # 2. Chamar Event_Menu.show_menu() com o status de admin correto
+            choice = Event_Menu.show_menu(is_admin=is_current_user_admin)
+
+            if is_current_user_admin:
+                # Lógica para opções de ADMIN
+                if choice == "1": # Create Event
+                    self.create_event()
+                elif choice == "2": # Remove Event
+                    self.remove_event()
+                elif choice == "3": # Show Events
+                    self.show_active_events()
+                elif choice == "4": # Show Reviews
+                    self.show_reviews()
+                elif choice == "5": # Exit (do Menu de Eventos)
+                    break # Sai do loop do manage_event_menu
+                else:
+                    print("Opção inválida para administrador.")
+            else:
+                # Lógica para opções de USUÁRIO NÃO-ADMIN
+                if choice == "1": # Show Events
+                    self.show_active_events()
+                elif choice == "2": # Show Reviews
+                    self.show_reviews()
+                elif choice == "3":
+                    self.create_review()
+                elif choice == "4": # Exit (do Menu de Eventos)
+                    break # Sai do loop do manage_event_menu
+                else:
+                    print("Opção inválida para usuário.")
         
     
     
-    def main_menu():
-            while True:
-                choice = Main_menu.show_menu()
-                
-                if choice == "1":
-                    pass
+    def main_menu(self):
+        while True:
+            print("\n--- Menu Principal ---")
+            # Supondo que Main_menu.show_menu() exibe "1 - Event Menu", "2 - Sair do Menu Principal"
+            choice = Main_menu.show_menu() # Do seu menus.py
+
+            if choice == "1":
+                # CORRETO: Chama o manage_event_menu quando a opção 1 é escolhida
+                self.manage_event_menu()
+            elif choice == "2": # Ou a opção que significa "Sair" ou "Deslogar"
+                print("Deslogando e voltando para tela inicial...")
+                self.current_user = None # Importante para a lógica no run()
+                break # Sai do loop do main_menu, voltando para o loop do run()
+            else:
+                print("Opção inválida, por favor escolha uma do menu.")
         
                     
     def create_user(self):
-        name = input("Input your name: "),
+        name = input("Input your name: ")
         while True:
             cpf = input("CPF(xxx.xxx.xxx-xx): ")
             if is_valid_cpf(cpf):
@@ -98,10 +141,17 @@ class System():
             else:
                 print("please use a valid e-mail adress")
            
-        username = input("username: "),
+        username = input("username: ")
         password = input("password: ")
         
-        
+        try:
+            new_user = User(name=name, cpf=cpf, age=str(age), email=email, username=username, password=password)
+            self.active_users.append(new_user)
+            print(f"User {username} created successfully!")
+            self.current_user = new_user
+            print(f"Welcome, {new_user.name}!")
+        except Exception as e:
+            print(f"Error creating user object: {e}")
       
 
                 

@@ -11,10 +11,11 @@ class Person:
     email: str
     
 class User(Person):
-    def __init__(self, name: str, cpf: str, age: str, email: str,username: str, password: str):
+    def __init__(self, name: str, cpf: str, age: str, email: str,username: str, password: str, admin: bool = False):
         super().__init__(name, cpf, age, email)
         self.username = username
         self.password = password
+        self.admin = admin
         self.tickets: List[Ticket] = []
         
     def verify_password(self, password: str) -> bool:
