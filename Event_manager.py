@@ -47,8 +47,3 @@ class Event_Manager():
         )
         self._events.append(new_event)
         print(f"created {name}, with {tickets} tickets")
-
-manajo = Event_Manager()
-manajo.create_event(
-    
-)
