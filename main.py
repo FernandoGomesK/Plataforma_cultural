@@ -8,7 +8,6 @@ from event import *
 from review import *
 from menus import *
 from Event_manager import *
-
 from verifications import *
 
 class System():
@@ -74,7 +73,12 @@ class System():
             if is_current_user_admin:
                 # Lógica para opções de ADMIN
                 if choice == "1": # Create Event
-                    self.create_event()
+                    new_event = self.event_manager.create_event()
+                    if new_event:
+                        self.active_events.append(new_event)
+                        print(f"event {new_event.name}")
+                    else:
+                        print("error creating event")
                 elif choice == "2": # Remove Event
                     self.remove_event()
                 elif choice == "3": # Show Events
@@ -153,20 +157,8 @@ class System():
             self.current_user = new_user
             print(f"Welcome, {new_user.name}!")
         except Exception as e:
-            print(f"Error creating user object: {e}")
-      
-
-    def create_e            
-                          
-    def create_event(self):
-        name = input("Event name: ")
-        tickets = int(input("Ticket Quantity: "))
-        price = float(input("Ticket price: "))
-        
-        new_event = Event(name, tickets, price)
-        self.active_events.append(new_event)
-        print(f"created {name}, with {tickets} tickets")
-        
+            print(f"Error creating user object: {e}")        
+                              
     def sell_tickets(self):
         if not self.active_events:
             print("there is no event with tickets to be sold")
