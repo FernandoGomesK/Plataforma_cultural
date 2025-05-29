@@ -13,6 +13,8 @@ from verifications import *
 class System():
     def __init__(self):
         self.active_events: List[Event] = []
+        self.active_users: List[Person] = []
+        self.current_user: Optional[Person] = None
         self.active_users: List[User] = []
         self.current_user: Optional[User] = None
         self.event_manager = Event_Manager()
@@ -67,7 +69,7 @@ class System():
         is_current_user_admin = self.current_user.admin
         while True:
             print("\n--- Menu de Eventos ---")
-            # 2. Chamar Event_Menu.show_menu() com o status de admin correto
+            
             choice = Event_Menu.show_menu(is_admin=is_current_user_admin)
 
             if is_current_user_admin:
@@ -81,47 +83,47 @@ class System():
                         print("error creating event")
                 elif choice == "2": # Remove Event
                     self.remove_event()
-                elif choice == "3": # Show Events
+                elif choice == "3": 
                     self.show_active_events()
-                elif choice == "4": # Show Reviews
+                elif choice == "4": 
                     self.show_reviews()
-                elif choice == "5": # Exit (do Menu de Eventos)
-                    break # Sai do loop do manage_event_menu
+                elif choice == "5": 
+                    break 
                 else:
-                    print("Opção inválida para administrador.")
+                    print("Admin invalid Option.")
             else:
-                # Lógica para opções de USUÁRIO NÃO-ADMIN
-                if choice == "1": # Show Events
+               
+                if choice == "1":
                     self.show_active_events()
-                elif choice == "2": # Show Reviews
+                elif choice == "2": 
                     self.show_reviews()
                 elif choice == "3":
                     self.create_review()
-                elif choice == "4": # Exit (do Menu de Eventos)
-                    break # Sai do loop do manage_event_menu
+                elif choice == "4": 
+                    break 
                 else:
-                    print("Opção inválida para usuário.")
+                    print("User invalid Option.")
         
     
     
     def main_menu(self):
         while True:
             print("\n--- Menu Principal ---")
-            # Supondo que Main_menu.show_menu() exibe "1 - Event Menu", "2 - Sair do Menu Principal"
-            choice = Main_menu.show_menu() # Do seu menus.py
-
+           
+            choice = Main_menu.show_menu() 
             if choice == "1":
-                # CORRETO: Chama o manage_event_menu quando a opção 1 é escolhida
+                
                 self.manage_event_menu()
-            elif choice == "2": # Ou a opção que significa "Sair" ou "Deslogar"
+            elif choice == "2": 
                 print("Deslogando e voltando para tela inicial...")
-                self.current_user = None # Importante para a lógica no run()
-                break # Sai do loop do main_menu, voltando para o loop do run()
+                self.current_user = None 
+                break 
             else:
                 print("Opção inválida, por favor escolha uma do menu.")
         
                     
     def create_user(self):
+        user_type_choice = input("Qual tipo de usuário deseja registrar? (1-User, 2-Organizer, 3-Intermediary): ")
         name = input("Input your name: ")
         while True:
             cpf = input("CPF(xxx.xxx.xxx-xx): ")
@@ -151,14 +153,22 @@ class System():
         password = input("password: ")
         
         try:
-            new_user = User(name=name, cpf=cpf, age=str(age), email=email, username=username, password=password)
-            self.active_users.append(new_user)
-            print(f"User {username} created successfully!")
-            self.current_user = new_user
-            print(f"Welcome, {new_user.name}!")
+            if user_type_choice == '1': # User
+                new_person = User(name=name, cpf=cpf, age=str(age), email=email, username=username, password=password)
+            elif user_type_choice == '2': # Organizer
+                new_person = Organizer(name=name, cpf=cpf,age = str(age),email=email, username=username, password=password)
+            elif user_type_choice == '3': # Intermediary
+                new_person = Intermediary(name=name, cpf=cpf, age = str(age), email=email, username=username, password=password)
+            else:
+                print("Tipo de usuário inválido.")
+                return 
+
+            self.active_users.append(new_person)
+            print(f"{type(new_person).__name__} {new_person.name} criado com sucesso!")
+
         except Exception as e:
-            print(f"Error creating user object: {e}")        
-                              
+            print(f"Error creating User: {e}")
+                                     
     def sell_tickets(self):
         if not self.active_events:
             print("there is no event with tickets to be sold")
