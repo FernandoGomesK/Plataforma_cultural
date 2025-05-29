@@ -34,8 +34,7 @@ class Event_Manager():
                     print("The end date must be after the start date")  
             except ValueError:
                 print("Invalid date format. Please use DD/MM/YYYY.")
-        
-        
+         
         new_event = Event(
             name = name,
             total_tickets = tickets,
@@ -45,5 +44,14 @@ class Event_Manager():
             start_date = start_date,
             end_date = end_date
         )
-        self._events.append(new_event)
         return new_event
+    
+    def show_active_events(self):
+        if not self.active_events:
+            print("there is no events currently active")
+            return
+        else:    
+            print("current active events")
+            for idx, event in enumerate(self.active_events, 1): 
+                print(f"{idx}. Event name: {event.name} price: R${event.ticket_price}, {len(event.available_tickets)}/{len(event._tickets)} tickets left")
+                print("/////////////////////////////")

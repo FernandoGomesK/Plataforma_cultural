@@ -56,19 +56,16 @@ class System():
                 else:
                     print("invalid option, please select one from the menu")
                     
-                
-                    
     def login(self, username: str, password: str):
         for user in self.active_users:
             if user.username == username and user.password == password:
                 return user
         raise ValueError("User not found")
     
-
     def manage_event_menu(self):
         is_current_user_admin = self.current_user.admin
         while True:
-            print("\n--- Menu de Eventos ---")
+            print("\n--- Event Menu ---")
             
             choice = Event_Menu.show_menu(is_admin=is_current_user_admin)
 
@@ -103,27 +100,24 @@ class System():
                     break 
                 else:
                     print("User invalid Option.")
-        
-    
-    
+          
     def main_menu(self):
         while True:
-            print("\n--- Menu Principal ---")
+            print("\n--- Main Menu ---")
            
             choice = Main_menu.show_menu() 
             if choice == "1":
                 
                 self.manage_event_menu()
             elif choice == "2": 
-                print("Deslogando e voltando para tela inicial...")
+                print("Logging out and returning to login menu...")
                 self.current_user = None 
                 break 
             else:
-                print("Opção inválida, por favor escolha uma do menu.")
-        
-                    
+                print("Invalid Option, please select one from the menu.") 
+                           
     def create_user(self):
-        user_type_choice = input("Qual tipo de usuário deseja registrar? (1-User, 2-Organizer, 3-Intermediary): ")
+        user_type_choice = input("What User do you want to register? (1-User, 2-Organizer, 3-Intermediary): ")
         name = input("Input your name: ")
         while True:
             cpf = input("CPF(xxx.xxx.xxx-xx): ")
@@ -160,11 +154,11 @@ class System():
             elif user_type_choice == '3': # Intermediary
                 new_person = Intermediary(name=name, cpf=cpf, age = str(age), email=email, username=username, password=password)
             else:
-                print("Tipo de usuário inválido.")
+                print("Invalid User Type.")
                 return 
 
             self.active_users.append(new_person)
-            print(f"{type(new_person).__name__} {new_person.name} criado com sucesso!")
+            print(f"{type(new_person).__name__} {new_person.name} Created Sucessfully!")
 
         except Exception as e:
             print(f"Error creating User: {e}")
