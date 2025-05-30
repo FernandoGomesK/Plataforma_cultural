@@ -290,4 +290,3 @@ if __name__ == "__main__":
     cultural = System()
     cultural.gen_admin()
     cultural.run()
-    

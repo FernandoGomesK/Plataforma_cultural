@@ -30,7 +30,7 @@ class Event_Menu():
             print("2 - Show Reviews")
             print("3 - Write Review")
             print("4 - Exit")
-            return input("Choose one option")
+            return input("Choose one option: ")
             
 
       
