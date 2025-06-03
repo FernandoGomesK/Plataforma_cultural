@@ -16,6 +16,7 @@ class Ticket:
     def to_dict(self):
         return {
             'id': self.id,
+            'event': self.event, 
             'sold': self.sold
         }
         

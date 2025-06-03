@@ -11,6 +11,7 @@ class Login_menu():
 class Main_menu():
     @staticmethod
     def show_menu():
+        print("\n--- Main Menu ---")
         print("1 - Event Menu")
         print("2 - Exit")
         return input("Choose one option: ")

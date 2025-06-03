@@ -13,10 +13,8 @@ from verifications import *
 class System():
     def __init__(self):
         self.active_events: List[Event] = []
-        self.active_users: List[Person] = []
-        self.current_user: Optional[Person] = None
-        self.active_users: List[User] = []
-        self.current_user: Optional[User] = None
+        self.active_users: List[BaseUser] = []
+        self.current_user: Optional[BaseUser] = None
         self.event_manager = Event_Manager()
         #self.data_manager = Data_manager()
         self.load()
@@ -26,6 +24,8 @@ class System():
                 if not self.current_user:
                     choice = self._manage_Login_and_Register()
                     if choice == "exit":
+                        print("/////////////////////////////")
+                        print("Goodbye!")
                         break
                 else:
                     self.main_menu()
@@ -102,12 +102,9 @@ class System():
                     print("User invalid Option.")
           
     def main_menu(self):
-        while True:
-            print("\n--- Main Menu ---")
-           
+        while True:  
             choice = Main_menu.show_menu() 
             if choice == "1":
-                
                 self.manage_event_menu()
             elif choice == "2": 
                 print("Logging out and returning to login menu...")
@@ -241,6 +238,7 @@ class System():
         
         data = {
             'events': [e.to_dict() for e in self.active_events],
+            'users': [u.to_dict() for u in self.active_users]
         }   
 
         try:
