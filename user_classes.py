@@ -36,12 +36,17 @@ class BaseUser(Person):
             "tickets": [t.to_dict() for t in self.tickets]
         })
         return data
-    
     def verify_password(self, password: str) -> bool:
         return self.password == password
+    
+    def buy_ticket(self, ticket: Ticket):
+        ticket.mark_as_sold()
+        self.tickets.append(ticket)
+        return ticket
 class User(BaseUser):
     def __init__(self, name: str, cpf: str, age: str, email: str,username: str, password: str, admin: bool = False):
-        super().__init__(name, cpf, age, email, username, password, admin)    
+        super().__init__(name, cpf, age, email, username, password, admin)
+                 
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Organizer(BaseUser):
     def __init__(self, name: str, cpf: str, age: str, email: str, username:str, password: str, admin: bool = True):

@@ -26,6 +26,7 @@ class System():
                     if choice == "exit":
                         print("/////////////////////////////")
                         print("Goodbye!")
+                        self.save()
                         break
                 else:
                     self.main_menu()
@@ -295,59 +296,59 @@ class System():
                     
                     #////////////user loading///////////////
                     
-                    self.active_users = []
-                    for user_data in data.get('users', []):
-                        user_type = user_data['user_type']
-                        name = user_data['name']
-                        cpf = user_data['cpf']
-                        age = user_data['age']
-                        email = user_data['email']
-                        username = user_data['username']
-                        password = user_data['password']
-                        admin = user_data['admin']
+                self.active_users = []
+                for user_data in data.get('users', []):
+                    user_type = user_data['user_type']
+                    name = user_data['name']
+                    cpf = user_data['cpf']
+                    age = user_data['age']
+                    email = user_data['email']
+                    username = user_data['username']
+                    password = user_data['password']
+                    admin = user_data['admin']
 
-                        if not all([name, cpf, age, email, username, password, admin]):
-                            print("Invalid user data. Skipping user.")
-                            continue
+                    if not all([name, cpf, age, email, username, password, admin]):
+                        print("Invalid user data. Skipping user.")
+                        continue
                         
-                        new_user_object = None
-                        try:
-                            if user_type == "User":
-                                new_user_object = User(name, cpf, age, email, username, password, admin)
-                            if user_type == "Organizer":
-                                new_user_object = Organizer(name, cpf, age, email, username, password, admin)
-                            if user_type == "Intermediary":
-                                new_user_object = Intermediary(name, cpf, age, email, username, password, admin)
-                            else:
-                                print(f"Invalid user type {user_type}. Skipping user.")
-                        except Exception as e:
-                            print(f"error creating user {user_type}, {name} , {e}")
-                            continue
+                    new_user_object = None
+                    try:
+                        if user_type == "User":
+                            new_user_object = User(name, cpf, age, email, username, password, admin)
+                        elif user_type == "Organizer":
+                            new_user_object = Organizer(name, cpf, age, email, username, password, admin)
+                        elif user_type == "Intermediary":
+                            new_user_object = Intermediary(name, cpf, age, email, username, password, admin)
+                        else:
+                            print(f"Invalid user type {user_type}. Skipping user.")
+                    except Exception as e:
+                        print(f"error creating user {user_type}, {name} , {e}")
+                        continue
                         
-                        if new_user_object:
-                            loaded_user_tickets = []
-                            for ticket_dict in user_data.get('tickets', []):
-                                try:
-                                    ticket_id = ticket_dict.get('id')
-                                    ticket_event_name = ticket_dict.get('event_name')
-                                    ticket_price = ticket_dict.get('price')
-                                    ticket_sold = ticket_dict.get('sold')
+                    if new_user_object:
+                        loaded_user_tickets = []
+                        for ticket_dict in user_data.get('tickets', []):
+                            try:
+                                ticket_id = ticket_dict.get('id')
+                                ticket_event_name = ticket_dict.get('event_name')
+                                ticket_price = ticket_dict.get('price')
+                                ticket_sold = ticket_dict.get('sold')
                                     
-                                    if ticket_id is None or ticket_event_name is None or ticket_price is None or ticket_sold is None:
-                                        print(f"Ticket Data is missing {ticket_data}. Skipping ticket.")
-                                        continue
+                                if ticket_id is None or ticket_event_name is None or ticket_price is None or ticket_sold is None:
+                                    print(f"Ticket Data is missing {ticket_data}. Skipping ticket.")
+                                    continue
                                     
-                                    created_ticket = Ticket(
-                                        id=ticket_id,
-                                        event_name=ticket_event_name,
-                                        price=ticket_price,
-                                        sold_status=ticket_sold
+                                created_ticket = Ticket(
+                                    id=ticket_id,
+                                    event_name=ticket_event_name,
+                                    price=ticket_price,
+                                    sold_status=ticket_sold
                                     )
-                                except Exception as e:
-                                    print(f"Couldnt get ticket data, skipping ticket {e}")
+                            except Exception as e:
+                                print(f"Couldnt get ticket data, skipping ticket {e}")
                                     
-                            new_user_object.tickets = loaded_user_tickets
-                            self.active_users.append(new_user_object)
+                        new_user_object.tickets = loaded_user_tickets
+                        self.active_users.append(new_user_object)
                     
                         
                 print('The Data Was Loaded sucessully')
@@ -359,7 +360,7 @@ class System():
             print(f"Error loading data: {e}")
             
     def gen_admin(self):
-        new_person = User(name= "eu", cpf="123.456.789-10", age=str("18"), email="eu@eu.com", username="adm", password="123", admin=True)
+        new_person = User(name= "eu2", cpf="123.456.789-11", age=str("20"), email="eu@eu.com", username="user", password="123", admin=False)
         self.active_users.append(new_person)
 
 if __name__ == "__main__":

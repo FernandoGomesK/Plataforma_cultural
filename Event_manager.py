@@ -8,7 +8,12 @@ class Event_Manager():
 
     def create_event(self):
         print("----------Create Event----------")
-        name = input("Input the name of the Event: ")
+        while True:
+            name = input("Input the name of the Event: ").strip()
+            if name:
+                break
+            else:
+                print("the name cannot be empty")       
         tickets = int(input("Input the number of tickets: "))
         price = float(input("Input the price of the ticket: "))
         event_type = input("state the type of event(theather, play, concert): ")
