@@ -4,12 +4,11 @@ from typing import TYPE_CHECKING, Optional
 if TYPE_CHECKING:
     from event import Event
 class Ticket:
-    def __init__(self,
-                 id_value: Optional[str] = None, event_name: str = None, price: float):
+    def __init__(self, price: float, event_name: str, id_value: Optional[str] = None, sold_status: bool = False ):
         self.id = id_value if id_value is not None else str(uuid.uuid4())[:4]
-        self.event = event
+        self.event_name = event_name
         self.price = price
-        self.sold = False
+        self.sold = sold_status
     
     def mark_as_sold(self):  
         self.sold = True      
@@ -17,7 +16,7 @@ class Ticket:
     def to_dict(self):
         return {
             'id': self.id,
-            'event': self.event, 
+            'event_name': self.event_name, 
             'price': self.price,
             'sold': self.sold
         }

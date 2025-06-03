@@ -8,7 +8,7 @@ class Event:
                  event_type: str, description: str, start_date: str, end_date: str):
         self.name = name
         self.ticket_price = ticket_price
-        self._tickets = [Ticket(self, price = ticket_price) for x in range(total_tickets)]
+        self._tickets = [Ticket(price = ticket_price, event_name = name) for x in range(total_tickets)]
         self.reviews: List[Review] = []
         self.event_type = event_type
         self.description = description  

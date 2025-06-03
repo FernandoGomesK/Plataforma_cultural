@@ -255,24 +255,44 @@ class System():
                 data = json.load(f)
                 
                 self.active_events = []
+                #////////////event loading///////////////
                 for event_data in data.get('events', []):
+                    event_name = event_data.get("name")
+                    event_ticket_price = event_data.get("ticket_price")
+                    event_tickets_data = event_data.get("tickets", [])
+                    event_type_str = event_data.get("type")
+                    event_description = event_data.get("description")
+                    event_start_date = event_data.get("start_date")
+                    event_end_date = event_data.get("end_date")
+                    
+                    if not all([event_name, event_ticket_price, event_tickets_data, event_type_str, event_description, event_start_date, event_end_date]):
+                        print("Invalid event data. Skipping event.")
+                        continue
+                    
                     event = Event(
-                        name=event_data['name'],
-                        total_tickets=len(event_data['tickets']),
-                        ticket_price=event_data['ticket_price']
+                        name=event_name,
+                        total_tickets=len(event_tickets_data),
+                        ticket_price=event_ticket_price,
+                        event_type=event_type_str,
+                        description=event_description,
+                        start_date=event_start_date,
+                        end_date=event_end_date
                     )
                     
-                    for ticket_data, ticket_obj in zip(event_data['tickets'], event._tickets):
-                        ticket_obj.sold = ticket_data['sold']
-                        ticket_obj.id = ticket_data.get('id', str(uuid.uuid4())[:4])
-                        
-                    for review_data in event_data['reviews']:
+                    for ticket_data, ticket_obj in zip(event_tickets_data, event._tickets):
+                        saved_ticket_id = ticket_data.get('id')
+                        if saved_ticket_id: 
+                            ticket_obj.id = saved_ticket_id 
+                        ticket_obj.sold = ticket_data.get('sold', False)
+
+                    event.reviews = []
+                    for review_data in event_data.get('reviews', []):
                         event.reviews.append(Review(
-                            author=review_data['author'],
-                            review=review_data['review']
+                            author=review_data.get('author'),
+                            review=review_data.get('review')
                     ))
                     self.active_events.append(event)
-                    
+                    #////////////user loading///////////////
                     self.active_users = []
                     for user_data in data.get('users', []):
                         user_type = user_data['user_type']
@@ -307,16 +327,25 @@ class System():
                             for ticket_dict in user_data.get('tickets', []):
                                 try:
                                     ticket_id = ticket_dict.get('id')
-                                    ticket_event = ticket_dict.get('event')
+                                    ticket_event_name = ticket_dict.get('event')
                                     ticket_price = ticket_dict.get('price')
                                     ticket_sold = ticket_dict.get('sold')
                                     
-                                    if ticket_id is None or ticket_event is None or ticket_price is None or ticket_sold is None:
+                                    if ticket_id is None or ticket_event_name is None or ticket_price is None or ticket_sold is None:
                                         print(f"Ticket Data is missing {ticket_data}. Skipping ticket.")
                                         continue
                                     
-                                    created_ticket = Ticket()
-                                except
+                                    created_ticket = Ticket(
+                                        id=ticket_id,
+                                        event_name=ticket_event_name,
+                                        price=ticket_price,
+                                        sold_status=ticket_sold
+                                    )
+                                except Exception as e:
+                                    print(f"Couldnt get ticket data, skipping ticket {e}")
+                                    
+                            new_user_object.tickets = loaded_user_tickets
+                            self.active_users.append(new_user_object)
                     
                         
                 print('The Data Was Loaded sucessully')

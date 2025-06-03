@@ -4,7 +4,7 @@ from datetime import *
 
 class Event_Manager():
     def __init__(self):
-        self._events: List[Event] = []
+        pass
 
     def create_event(self):
         print("----------Create Event----------")
@@ -15,7 +15,7 @@ class Event_Manager():
         description = input("Input the description of the event: ")
         
         start_date = None
-        while True:
+        while True: 
             start_date = input("Input the start date of the event(DD/MM/YYYY): ")
             try:
                 start = datetime.strptime(start_date, "%d/%m/%Y").date()
