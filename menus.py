@@ -28,6 +28,7 @@ class Event_Menu():
             return input("Choose one option: ")
         else:
             print("1 - Show Events")
+            print("2 - Buy tickets")
             print("2 - Show Reviews")
             print("3 - Write Review")
             print("4 - Exit")

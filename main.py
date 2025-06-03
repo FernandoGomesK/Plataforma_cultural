@@ -93,11 +93,13 @@ class System():
                
                 if choice == "1":
                     self.show_active_events()
-                elif choice == "2": 
+                elif choice == "2":
+                    self.sell_tickets()
+                elif choice == "3": 
                     self.show_reviews()
-                elif choice == "3":
+                elif choice == "4":
                     self.create_review()
-                elif choice == "4": 
+                elif choice == "5": 
                     break 
                 else:
                     print("User invalid Option.")
@@ -169,14 +171,32 @@ class System():
         self.show_active_events()
             
         try:
-            choice = int(input("select Event: ")) - 1
-            selected_event = self.active_events[choice]
-            ticket = selected_event.sell_ticket()
-            print(f"Sold ticket for {selected_event.name}! ID: {ticket.id}")
-        except (ValueError, IndexError):
-            print("Invalid event selection!")
+            choice_str = input("select Event (digite o número): ")
+            if not choice_str.isdigit(): 
+                print("Seleção inválida. Por favor, digite um número.")
+                return
+            choice = int(choice_str) - 1
 
-        
+            if not (0 <= choice < len(self.active_events)):
+                print("Número do evento fora do intervalo.")
+                return
+                
+            selected_event = self.active_events[choice]
+            
+            ticket_vendido = selected_event.sell_ticket() 
+            
+            self.current_user.buy_ticket(ticket_vendido)
+            
+            print(f"Ingresso ID {ticket_vendido.id} para o evento '{selected_event.name}' comprado com sucesso por {self.current_user.name}!")
+            print(f"Você agora tem {len(self.current_user.tickets)} ingresso(s).")
+
+        except ValueError as ve: 
+            print(f"Erro na venda: {ve}")
+        except IndexError: 
+            print("Seleção de evento inválida!")
+        except Exception as e: 
+            print(f"Ocorreu um erro inesperado: {e}")
+            
     def show_active_events(self):
         if not self.active_events:
             print("there is no events currently active")
