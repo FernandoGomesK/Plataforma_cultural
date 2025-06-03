@@ -292,7 +292,9 @@ class System():
                             review=review_data.get('review')
                     ))
                     self.active_events.append(event)
+                    
                     #////////////user loading///////////////
+                    
                     self.active_users = []
                     for user_data in data.get('users', []):
                         user_type = user_data['user_type']
@@ -327,7 +329,7 @@ class System():
                             for ticket_dict in user_data.get('tickets', []):
                                 try:
                                     ticket_id = ticket_dict.get('id')
-                                    ticket_event_name = ticket_dict.get('event')
+                                    ticket_event_name = ticket_dict.get('event_name')
                                     ticket_price = ticket_dict.get('price')
                                     ticket_sold = ticket_dict.get('sold')
                                     
