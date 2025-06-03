@@ -272,6 +272,53 @@ class System():
                             review=review_data['review']
                     ))
                     self.active_events.append(event)
+                    
+                    self.active_users = []
+                    for user_data in data.get('users', []):
+                        user_type = user_data['user_type']
+                        name = user_data['name']
+                        cpf = user_data['cpf']
+                        age = user_data['age']
+                        email = user_data['email']
+                        username = user_data['username']
+                        password = user_data['password']
+                        admin = user_data['admin']
+
+                        if not all([name, cpf, age, email, username, password, admin]):
+                            print("Invalid user data. Skipping user.")
+                            continue
+                        
+                        new_user_object = None
+                        try:
+                            if user_type == "User":
+                                new_user_object = User(name, cpf, age, email, username, password, admin)
+                            if user_type == "Organizer":
+                                new_user_object = Organizer(name, cpf, age, email, username, password, admin)
+                            if user_type == "Intermediary":
+                                new_user_object = Intermediary(name, cpf, age, email, username, password, admin)
+                            else:
+                                print(f"Invalid user type {user_type}. Skipping user.")
+                        except Exception as e:
+                            print(f"error creating user {user_type}, {name} , {e}")
+                            continue
+                        
+                        if new_user_object:
+                            loaded_user_tickets = []
+                            for ticket_dict in user_data.get('tickets', []):
+                                try:
+                                    ticket_id = ticket_dict.get('id')
+                                    ticket_event = ticket_dict.get('event')
+                                    ticket_price = ticket_dict.get('price')
+                                    ticket_sold = ticket_dict.get('sold')
+                                    
+                                    if ticket_id is None or ticket_event is None or ticket_price is None or ticket_sold is None:
+                                        print(f"Ticket Data is missing {ticket_data}. Skipping ticket.")
+                                        continue
+                                    
+                                    created_ticket = Ticket()
+                                except
+                    
+                        
                 print('The Data Was Loaded sucessully')
                 print('//////////////////////////////')
                 
