@@ -55,5 +55,9 @@ class Organizer(BaseUser):
 class Intermediary(BaseUser):
     def __init__(self, name: str, cpf: str, age: str, email: str, username:str, password: str, admin: bool = True):
         super().__init__(name, cpf, age, email, username, password, admin)
+        
+    def Sell_tickets(self, ticket: Ticket):
+        ticket.mark_as_sold
+        return ticket
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
