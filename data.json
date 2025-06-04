@@ -1,0 +1,51 @@
+{
+  "events": [
+    {
+      "name": "eu",
+      "ticket_price": 20.0,
+      "tickets": [
+        {
+          "id": "7c67",
+          "event_name": "eu",
+          "price": 20.0,
+          "sold": false
+        },
+        {
+          "id": "c81f",
+          "event_name": "eu",
+          "price": 20.0,
+          "sold": false
+        }
+      ],
+      "reviews": [],
+      "type": "play",
+      "description": "eu",
+      "start_date": "12/06/2006",
+      "end_date": "12/06/2006"
+    }
+  ],
+  "users": [
+    {
+      "user_type": "Organizer",
+      "name": "eu",
+      "cpf": "123.456.789-10",
+      "age": "18",
+      "email": "eu@eu.com",
+      "username": "adm",
+      "password": "123",
+      "admin": true,
+      "tickets": []
+    },
+    {
+      "user_type": "User",
+      "name": "eu2",
+      "cpf": "123.456.789-11",
+      "age": "20",
+      "email": "eu@eu.com",
+      "username": "user",
+      "password": "123",
+      "admin": false,
+      "tickets": []
+    }
+  ]
+}
