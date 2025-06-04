@@ -43,6 +43,7 @@ class BaseUser(Person):
         ticket.mark_as_sold()
         self.tickets.append(ticket)
         return ticket
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class User(BaseUser):
     def __init__(self, name: str, cpf: str, age: str, email: str,username: str, password: str, admin: bool = False):
         super().__init__(name, cpf, age, email, username, password, admin)
@@ -59,5 +60,5 @@ class Intermediary(BaseUser):
     def Sell_tickets(self, ticket: Ticket):
         ticket.mark_as_sold
         return ticket
-#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     

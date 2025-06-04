@@ -7,6 +7,20 @@ class Event_Manager():
         pass
 
     def create_event(self):
+        """
+    Prompts user to enter the required information and creates an event object
+    
+    Asks for:
+        - name of the event
+        - number of tickets
+        - ticket price
+        - type of event
+        - description of the event
+        - start and end dates of the event
+    
+    Returns:
+        - a valid Event object
+    """
         print("----------Create Event----------")
         while True:
             name = input("Input the name of the Event: ").strip()
@@ -51,7 +65,14 @@ class Event_Manager():
         )
         return new_event
     
-    def show_active_events(self):
+    def show_active_events(self):        
+        """
+    Displays a list of active events.
+
+    If there are no active events, a message indicating the absence of events is printed.
+    Otherwise, it prints the list of active events, displaying each event's name, ticket
+    price, and the number of available tickets in relation to the total number of tickets.
+    """
         if not self.active_events:
             print("there is no events currently active")
             return
