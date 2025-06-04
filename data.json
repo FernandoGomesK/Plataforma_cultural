@@ -1,5 +1,29 @@
 {
-  "events": [],
+  "events": [
+    {
+      "name": "eu",
+      "ticket_price": 20.0,
+      "tickets": [
+        {
+          "id": "7c67",
+          "event_name": "eu",
+          "price": 20.0,
+          "sold": false
+        },
+        {
+          "id": "c81f",
+          "event_name": "eu",
+          "price": 20.0,
+          "sold": false
+        }
+      ],
+      "reviews": [],
+      "type": "play",
+      "description": "eu",
+      "start_date": "12/06/2006",
+      "end_date": "12/06/2006"
+    }
+  ],
   "users": [
     {
       "user_type": "Organizer",

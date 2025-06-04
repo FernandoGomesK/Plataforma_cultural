@@ -64,6 +64,26 @@ class System():
         raise ValueError("User not found")
     
     def manage_event_menu(self):
+
+        """
+        This function is responsible for managing the user interaction when the user wants to manage events.
+
+        If the user is an admin, it will show the admin options:
+            - Create Event: creates a new event
+            - Remove Event: removes an event
+            - Show Events: shows all active events
+            - Show Reviews: shows all reviews for all events
+            - Exit: exits the event menu
+
+        If the user is not an admin, it will show the user options:
+            - Show Events: shows all active events
+            - Buy Ticket: allows the user to buy a ticket for an event
+            - Show Reviews: shows all reviews for all events
+            - Write Review: allows the user to write a review for an event
+            - Exit: exits the event menu
+
+        It will keep asking the user for an option until the user chooses to exit.
+        """
         is_current_user_admin = self.current_user.admin
         while True:
             print("\n--- Event Menu ---")
@@ -77,6 +97,7 @@ class System():
                     if new_event:
                         self.active_events.append(new_event)
                         print(f"event {new_event.name}")
+                        self.save()
                     else:
                         print("error creating event")
                 elif choice == "2": # Remove Event
@@ -139,6 +160,7 @@ class System():
         while True: 
             email = input("E-mail: ")
             if is_valid_email(email):
+                self.save()
                 break
             else:
                 print("please use a valid e-mail adress")
