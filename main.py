@@ -193,9 +193,9 @@ class System():
         self.show_active_events()
             
         try:
-            choice_str = input("select Event (digite o número): ")
+            choice_str = input("select Event (type a number): ")
             if not choice_str.isdigit(): 
-                print("Seleção inválida. Por favor, digite um número.")
+                print("Invalid selection, please type a number.")
                 return
             choice = int(choice_str) - 1
 
@@ -209,15 +209,15 @@ class System():
             
             self.current_user.buy_ticket(ticket_vendido)
             
-            print(f"Ingresso ID {ticket_vendido.id} para o evento '{selected_event.name}' comprado com sucesso por {self.current_user.name}!")
-            print(f"Você agora tem {len(self.current_user.tickets)} ingresso(s).")
+            print(f"Ingresso ID {ticket_vendido.id} for the event '{selected_event.name}' bought sucessfully by {self.current_user.name}!")
+            print(f"you now have {len(self.current_user.tickets)} ticket(s).")
 
         except ValueError as ve: 
-            print(f"Erro na venda: {ve}")
+            print(f"Error: {ve}")
         except IndexError: 
-            print("Seleção de evento inválida!")
+            print("Invalid Event Selection!")
         except Exception as e: 
-            print(f"Ocorreu um erro inesperado: {e}")
+            print(f"Unexpected error: {e}")
             
     def show_active_events(self):
         if not self.active_events:
