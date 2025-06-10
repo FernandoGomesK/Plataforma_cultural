@@ -1,4 +1,4 @@
-class Login_menu():
+class Login_Menu():
     @staticmethod
     def show_menu():
         print("Login Menu")
@@ -8,7 +8,7 @@ class Login_menu():
         print("3 - Exit")
         return input("Choose one option: ")
 
-class Main_menu():
+class Main_Menu():
     @staticmethod
     def show_menu():
         print("\n--- Main Menu ---")

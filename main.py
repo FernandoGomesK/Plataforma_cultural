@@ -7,7 +7,7 @@ from ticket import *
 from event import *
 from review import *
 from menus import *
-from Event_manager import *
+from event_manager import *
 from verifications import *
 
 class System():
@@ -33,11 +33,11 @@ class System():
                     
     
                 if not self.current_user:
-                    Login_menu()
+                    Login_Menu()
                     
     def _manage_Login_and_Register(self) -> str:
             while True:
-                choice = Login_menu.show_menu()
+                choice = Login_Menu.show_menu()
             
                 if choice == "1":
                     username = input("username: ")
@@ -127,7 +127,7 @@ class System():
           
     def main_menu(self):
         while True:  
-            choice = Main_menu.show_menu() 
+            choice = Main_Menu.show_menu() 
             if choice == "1":
                 self.manage_event_menu()
             elif choice == "2": 

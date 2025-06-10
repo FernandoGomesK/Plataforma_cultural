@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from ticket import Ticket
+from abc import ABC, abstractmethod
 
 
 @dataclass
@@ -19,7 +20,7 @@ class Person:
             "email": self.email
         }
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class BaseUser(Person):
+class Base_User(Person):
     def __init__(self, name: str, cpf: str, age: str, email: str, username: str, password: str, admin: bool = False):
         super().__init__(name, cpf, age, email)
         self.username = username
@@ -44,20 +45,20 @@ class BaseUser(Person):
         self.tickets.append(ticket)
         return ticket
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class User(BaseUser):
+class User(Base_User):
     def __init__(self, name: str, cpf: str, age: str, email: str,username: str, password: str, admin: bool = False):
         super().__init__(name, cpf, age, email, username, password, admin)
                  
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Organizer(BaseUser):
+class Organizer(Base_User):
     def __init__(self, name: str, cpf: str, age: str, email: str, username:str, password: str, admin: bool = True):
         super().__init__(name, cpf, age, email, username, password, admin)
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-class Intermediary(BaseUser):
+class Intermediary(Base_User):
     def __init__(self, name: str, cpf: str, age: str, email: str, username:str, password: str, admin: bool = True):
         super().__init__(name, cpf, age, email, username, password, admin)
         
-    def Sell_tickets(self, ticket: Ticket):
+    def sell_tickets(self, ticket: Ticket):
         ticket.mark_as_sold
         return ticket
 
