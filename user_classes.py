@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 
 @dataclass
-class Person:
+class Person(ABC):
     name: str
     cpf: str
     age: str
@@ -20,7 +20,7 @@ class Person:
             "email": self.email
         }
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Base_User(Person):
+class Base_User(ABC, Person):
     def __init__(self, name: str, cpf: str, age: str, email: str, username: str, password: str, admin: bool = False):
         super().__init__(name, cpf, age, email)
         self.username = username

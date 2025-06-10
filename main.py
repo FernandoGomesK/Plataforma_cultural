@@ -13,8 +13,8 @@ from verifications import *
 class System():
     def __init__(self):
         self.active_events: List[Event] = []
-        self.active_users: List[BaseUser] = []
-        self.current_user: Optional[BaseUser] = None
+        self.active_users: List[Base_User] = []
+        self.current_user: Optional[Base_User] = None
         self.event_manager = Event_Manager()
         #self.data_manager = Data_manager()
         self.load()
