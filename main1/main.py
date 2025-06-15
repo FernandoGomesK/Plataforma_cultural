@@ -1,5 +1,4 @@
 from typing import List, Optional
-import uuid
 import json
 from datetime import *
 from user_classes import *
