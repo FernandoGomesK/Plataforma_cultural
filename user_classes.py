@@ -20,7 +20,7 @@ class Person(ABC):
             "email": self.email
         }
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Base_User(ABC, Person):
+class Base_User(Person, ABC):
     def __init__(self, name: str, cpf: str, age: str, email: str, username: str, password: str, admin: bool = False):
         super().__init__(name, cpf, age, email)
         self.username = username
